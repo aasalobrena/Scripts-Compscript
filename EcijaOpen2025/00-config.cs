@@ -1,0 +1,6 @@
+SetExtension("scorecardPaperSize", "a4", "CompetitionConfig", "groupifier")
+SetExtension("scorecardOrder", "stacked", "CompetitionConfig", "groupifier")
+SetExtension("printStations", true, "CompetitionConfig", "groupifier")
+SetExtension("printScorecardsCoverSheets", true, "CompetitionConfig", "groupifier")
+SetExtension("localNamesFirst", true, "CompetitionConfig", "groupifier")
+SetExtension("scorecardsBackgroundUrl", "https://www.worldcubeassociation.org/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBaUprIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--680e5f314ce10a9075167107a836c382be6db69a/SolTraumado.png", "CompetitionConfig", "groupifier")
