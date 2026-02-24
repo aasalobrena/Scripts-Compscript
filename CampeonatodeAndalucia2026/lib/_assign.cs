@@ -2,6 +2,7 @@
 #include "_assignment_sets.cs"
 #include "_jobs.cs"
 #include "_scorers.cs"
+#include "_unavailabilities.cs"
 
 # Args:
 # 1: Round
@@ -43,6 +44,7 @@ Define("AssignVolunteers",
                     Scramblers({5, Number}, EventForRound({1, Round})),
                     Delegates()
                    ],
-                   VolunteerScorers(EventForRound({1, Round}), {2, Date})
+                   VolunteerScorers(EventForRound({1, Round}), {2, Date}),
+                   unavailable=Unavailable(Arg<Person>())
                   )
       )
