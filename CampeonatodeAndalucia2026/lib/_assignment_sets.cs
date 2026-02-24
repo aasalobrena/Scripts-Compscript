@@ -25,7 +25,7 @@ Define("OrganizersSet",
 
 Define("DelegatesSet",
        AssignmentSet("delegates",
-                     IsDelegating(),
+                     HasRole(DELEGATE),
                      (Stage() == GREEN)
                     )
       )

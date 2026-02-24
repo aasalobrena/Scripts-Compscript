@@ -55,6 +55,6 @@ Define("Scramblers",
 Define("Delegates",
        Job("delegate",
            1,
-           eligibility=IsDelegating()
+           eligibility=HasRole(DELEGATE)
           )
       )

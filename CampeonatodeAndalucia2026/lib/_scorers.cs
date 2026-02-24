@@ -34,6 +34,7 @@ Define("VolunteerScorers",
                            Switch({1, Event}, ScrambleSpeedWeight()),
                            ["scrambler"]
                           ),
-        PersonPropertyScorer(CompetingIn(Event()), 100)
+        ConditionalScorer(CompetingIn({1, Event}), true, (Arg<String>() == "delegate"), true, 100),
+        PersonPropertyScorer(HasRole(ORGANIZER), -100)
        ]
       )
