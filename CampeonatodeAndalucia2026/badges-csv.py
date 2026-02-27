@@ -12,6 +12,9 @@ assignment_letter = {
     "staff-delegate": "D"
 }
 
+from pathlib import Path
+import qrcode
+
 def generate_qr(link, output_path):
     qr = qrcode.QRCode(
         version=None,
@@ -21,13 +24,13 @@ def generate_qr(link, output_path):
     )
     qr.add_data(link)
     qr.make(fit=True)
-    img = qr.make_image(fill_color="white", back_color="black").convert("RGBA")
+    img = qr.make_image(fill_color="black", back_color="white").convert("RGBA")
     qr_data = img.getdata()
     qr_new_data = []
 
     for item in qr_data:
-        if item[:3] == (0, 0, 0):
-            qr_new_data.append((0, 0, 0, 0))
+        if item[:3] == (255, 255, 255):
+            qr_new_data.append((255, 255, 255, 0))
         else:
             qr_new_data.append(item)
 
