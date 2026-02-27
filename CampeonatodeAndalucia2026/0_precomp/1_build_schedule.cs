@@ -36,7 +36,7 @@ CreateGroups(_333-r3, 2, GREEN, 2026-03-08T16:20, 2026-03-08T16:40)
 
 # Misc
 CreateMiscActivity("Check-in", "other-checkin", PISTA, 2026-03-07T08:30, 2026-03-07T09:00)
-CreateMiscActivity("Doors open", "other-checkin", PISTA, 2026-03-08T08:30, 2026-03-08T09:00)
+CreateMiscActivity("Check-in", "other-checkin", PISTA, 2026-03-08T08:30, 2026-03-08T09:00)
 CreateMiscActivity("Lunch", "other-lunch", PISTA, 2026-03-07T13:40, 2026-03-07T15:10)
 CreateMiscActivity("Lunch", "other-lunch", PISTA, 2026-03-08T13:45, 2026-03-08T15:15)
 CreateMiscActivity("Copa de Andalucía", "other-misc", PISTA, 2026-03-07T19:35, 2026-03-07T21:00)
