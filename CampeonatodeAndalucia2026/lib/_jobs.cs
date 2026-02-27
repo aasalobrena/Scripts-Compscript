@@ -5,7 +5,8 @@ Define("EligibleVolunteer",
        And(Registered(),
            Not(HasRole(ORGANIZER)),
            Not(HasRole(DELEGATE)),
-           Not(IsNull(WcaId()))
+           Not(IsNull(WcaId())),
+           (WcaId() != "2013ROCA01")
           )
       )
 
