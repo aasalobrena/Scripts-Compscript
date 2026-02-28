@@ -4,6 +4,7 @@
 
 # Rooms
 #define PISTA "Pista"
+#define BARRA "Barra"
 
 # Stages
 #define GREEN "Verde"

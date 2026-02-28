@@ -1,3 +1,3 @@
 #include "../lib/_constants.cs"
 
-DeleteRooms([PISTA])
+DeleteRooms([PISTA, BARRA])
