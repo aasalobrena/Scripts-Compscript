@@ -63,9 +63,11 @@ try:
         for child in activity.get("childActivities", [])
     ]
 
-    for group in groups:
-        data[0].append(f"c-{group["activityCode"]}")
-        data[0].append(f"a-{group["activityCode"]}")
+    activityCodes = list(dict.fromkeys(group["activityCode"] for group in groups))
+
+    for activityCode in activityCodes:
+        data[0].append(f"c-{activityCode}")
+        data[0].append(f"a-{activityCode}")
 
     for person in wcif["persons"]:
         if person["registrantId"] is not None:
@@ -83,10 +85,15 @@ try:
             row.append(Path.cwd() / path)
             assignments = person["assignments"]
 
-            for group in groups:
+            for activityCode in activityCodes:
                 found = False
+                matching_groups = [g for g in groups if g["activityCode"] == activityCode]
                 for assignment in assignments:
-                    if group["id"] == assignment["activityId"]:
+                    group = next(
+                        (g for g in matching_groups if g["id"] == assignment["activityId"]),
+                        None
+                    )
+                    if group:
                         extension = next(
                             (
                                 ext
