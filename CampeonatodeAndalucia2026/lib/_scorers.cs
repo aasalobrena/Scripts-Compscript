@@ -24,17 +24,19 @@ Define("StandardJobNames", ["judge", "scrambler", "runner", "delegate"])
 # 1: Event
 # 2: Date
 Define("VolunteerScorers",
-       [PriorAssignmentScorer(-5, -1, Midnight({2, Date})),
-        PriorAssignmentScorer(-2, 0, 2026-03-07T00:00),
-        SameJobScorer(60, -5, 4, jobs=StandardJobNames()),
-        ConsecutiveJobScorer(90, -3, 0, jobs=StandardJobNames()),
-        ConsecutiveJobScorer(30, -5, 0, jobs=["scrambler"]),
-        SolvingSpeedScorer(Switch({1, Event}, EventsToScramblingEvents()),
+       [SolvingSpeedScorer(Switch({1, Event}, EventsToScramblingEvents()),
                            Switch(Switch({1, Event}, EventsToScramblingEvents()), ScrambleLimits()),
                            Switch({1, Event}, ScrambleSpeedWeight()),
                            ["scrambler"]
                           ),
-        ConditionalScorer(CompetingIn({1, Event}), true, (Arg<String>() == "delegate"), true, 100),
+        ConditionalScorer(And(CompetingIn({1, Event}),
+                              Not(CanScramble({1, Event}))),
+                          true,
+                          (Arg<String>() != "delegate"),
+                          true,
+                          50
+                         ),
+        ComputedWeightScorer(Length(RegisteredEvents()), ["judge", "runner", "scrambler"]),
         PersonPropertyScorer(HasRole(ORGANIZER), -100)
        ]
       )
