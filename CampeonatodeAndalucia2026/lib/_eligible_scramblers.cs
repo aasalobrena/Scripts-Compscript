@@ -9,7 +9,7 @@ Define("ScrambleLimits",
         Tuple(_minx, 1:40s),
         Tuple(_pyram, 8s),
         Tuple(_skewb, 8s),
-        Tuple(_sq1, 20s)
+        Tuple(_sq1, 25s)
        ]
       )
 
