@@ -22,7 +22,6 @@ Define("StandardJobNames", ["judge", "scrambler", "runner", "delegate"])
 
 # Args:
 # 1: Event
-# 2: Date
 Define("VolunteerScorers",
        [SolvingSpeedScorer(Switch({1, Event}, EventsToScramblingEvents()),
                            Switch(Switch({1, Event}, EventsToScramblingEvents()), ScrambleLimits()),

@@ -31,20 +31,19 @@ Define("AssignFixedGroups",
 
 # Args:
 # 1: Round
-# 2: Date of the round
-# 3: Number of judges
-# 4: Number of runners
-# 5: Number of scramblers
+# 2: Number of judges
+# 3: Number of runners
+# 4: Number of scramblers
 Define("AssignVolunteers",
        AssignStaff({1, Round},
                    true,
                    Persons(true),
-                   [Judges({3, Number}),
-                    Runners({4, Number}),
-                    Scramblers({5, Number}, EventForRound({1, Round})),
+                   [Judges({2, Number}),
+                    Runners({3, Number}),
+                    Scramblers({4, Number}, EventForRound({1, Round})),
                     Delegates()
                    ],
-                   VolunteerScorers(EventForRound({1, Round}), {2, Date}),
+                   VolunteerScorers(EventForRound({1, Round})),
                    unavailable=Unavailable(Arg<Person>())
                   )
       )
