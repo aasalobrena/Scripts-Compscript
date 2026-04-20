@@ -18,7 +18,7 @@ Define("ScramblePropKey",
 Define("MbfJudges", [2015SANC18, 2018MORA17, 2023OSOR03])
 Define("HasMbfAssignments", Or(CompetingIn(_333mbf), In(MbfJudges())))
 Define("ChillsEvent", (StringProperty(CHILL) == EventId({1, Event})))
-Define("CanStaff", And(Registered(), IsCompeting(), Not(HasRole(DELEGATE)), Not(HasRole(TRAINEE)), Not(HasRole(ORGANIZER)), Not(HasRole(STAFFDATAENTRY)), Not(In(WcaId(), UkuIds()))))
+Define("CanStaff", And(Registered(), IsCompeting(), Not(HasRole(DELEGATE)), Not(HasRole(TRAINEE)), Not(HasRole(ORGANIZER)), Not(HasRole(STAFFDATAENTRY)), Not(In(WcaId(), Concat(UkuIds(), ["2026CLAV02"])))))
 Define("CanStaffEvent", And(CanStaff(), Not(ChillsEvent({1, Event}))))
 Define("CanDataEvent", And(Not(ChillsEvent({1, Event})), HasRole(STAFFDATAENTRY)))
 Define("IsInTop25Psych", And(CompetingIn({1, Event}), (PsychSheetPosition({1, Event}) < (0.25 * Length(Persons(CompetingIn({1, Event})))))))
