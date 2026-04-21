@@ -20,7 +20,10 @@
 #define STAFFDATAENTRY "staff-dataentry"
 #define STAFFJUDGE "staff-judge"
 #define STAFFRUNNER "staff-runner"
+#define STAFFRUNNERUP "staff-RunnerUp"
 #define STAFFSCRAMBLER "staff-scrambler"
+#define STAFFTHIRD "staff-Third"
+#define STAFFWINNER "staff-Winner"
 
 Define("UkuIds", ["2013ROCA01", "2014TEJA07"])
 
