@@ -3,6 +3,7 @@
 #include "../lib/_constants.cs"
 #include "../lib/_helpers.cs"
 #include "../lib/_jobs.cs"
+#include "../lib/_scorers.cs"
 
 # 1 is other-checkin
 ManuallyAssignActivity(1, Persons(true))
