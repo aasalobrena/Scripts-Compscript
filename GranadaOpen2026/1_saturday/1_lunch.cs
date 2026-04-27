@@ -3,13 +3,13 @@
 #include "../lib/_jobs.cs"
 #include "../lib/_scorers.cs"
 
-AssignGroups(_sq1-r3, EveryoneSet(), stationRules=[StationAssignmentRule(true, "ascending", RoundPosition(_sq1-r2))])
+AssignGroups(_sq1-r2, EveryoneSet(), stationRules=[StationAssignmentRule(true, "ascending", RoundPosition(_sq1-r1))])
 AssignStaff(
-	_sq1-r3,
+	_sq1-r2,
 	true,
 	Persons(true),
-	FinalJobs(_sq1-r3, 3),
-	DefaultStaffScorers(_sq1-r3)
+	FinalJobs(_sq1-r2, 3),
+	DefaultStaffScorers(_sq1-r2)
 )
 
 AssignGroups(_333bf-r2, EveryoneSet(), stationRules=[StationAssignmentRule(true, "ascending", RoundPosition(_333bf-r1))])

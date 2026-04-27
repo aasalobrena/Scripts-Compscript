@@ -1,9 +1,9 @@
 #include "../lib/_constants.cs"
 
 # 74 is other-awards-sq1
-ManuallyAssignActivity(75, Persons((RoundPosition(_sq1-r3) == 1)), STAFFWINNER)
-ManuallyAssignActivity(75, Persons((RoundPosition(_sq1-r3) == 2)), STAFFRUNNERUP)
-ManuallyAssignActivity(75, Persons((RoundPosition(_sq1-r3) == 3)), STAFFTHIRD)
+ManuallyAssignActivity(75, Persons((RoundPosition(_sq1-r2) == 1)), STAFFWINNER)
+ManuallyAssignActivity(75, Persons((RoundPosition(_sq1-r2) == 2)), STAFFRUNNERUP)
+ManuallyAssignActivity(75, Persons((RoundPosition(_sq1-r2) == 3)), STAFFTHIRD)
 
 # 79 is other-awards-444
 ManuallyAssignActivity(79, Persons((RoundPosition(_444-r3) == 1)), STAFFWINNER)

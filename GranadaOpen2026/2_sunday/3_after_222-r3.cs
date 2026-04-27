@@ -1,7 +1,7 @@
 #include "../lib/_constants.cs"
 
 # 80 is other-awards-333
-ManuallyAssignActivity(80 Persons((RoundPosition(_333-r3) == 1)), STAFFWINNER)
+ManuallyAssignActivity(80, Persons((RoundPosition(_333-r3) == 1)), STAFFWINNER)
 ManuallyAssignActivity(80, Persons((RoundPosition(_333-r3) == 2)), STAFFRUNNERUP)
 ManuallyAssignActivity(80, Persons((RoundPosition(_333-r3) == 3)), STAFFTHIRD)
 
