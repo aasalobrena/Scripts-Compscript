@@ -1,4 +1,5 @@
 #include "../lib/_assignment_sets.cs"
+#include "../lib/_constants.cs"
 
 # Args:
 # 1: Round
@@ -19,4 +20,19 @@ Define("AssignGroupsR1",
                     [],
                     []
                    )
+      )
+
+# Args:
+# 1: Round
+# 2: Date
+# 3: Team
+# 4: Time result for scrambler scorer
+# 5: Weight for scrambler scorer
+Define("AssignStaffR1",
+       AssignStaff({1, Round},
+                   (Stage() == StagePerDateAndTeam({2, Date}, {3, Number})),
+                   Persons(((NumberProperty(TEAM) == {3, Number}) && Not(In(Weekday({2, Date}), ArrayProperty(UNAVAILABILITY))))),
+                   NormalRoundJobs({1, Round}),
+                   DefaultStaffScorers({1, Round}, {4, AttemptResult}, {5, Number})
+                  )
       )
