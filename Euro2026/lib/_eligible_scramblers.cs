@@ -45,7 +45,7 @@ Define("CanScramble",
                                   ),
                             ScrambleLimits()
                            )) &&
-                             In(EventId({1, Event}),
+                             In(EventId(Switch({1, Event}, EventsToScramblingEvents())),
                                 ArrayProperty("scramble-events")
                                )
        )

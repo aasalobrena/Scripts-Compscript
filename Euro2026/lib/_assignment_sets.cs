@@ -34,7 +34,7 @@ Define("StagePerDateAndTeam",
 Define("SGSet",
        AssignmentSet("sg",
                      (WcaId() == "2022GILB05"),
-                     ((Round() == _444-r1) && (GroupNumber() == Length(Groups(_444-r1))))
+                     ((RoundId(Round()) == "444-r1") && (GroupNumber() == (Length(Groups(_444-r1)) / 5)))
                     )
       )
 

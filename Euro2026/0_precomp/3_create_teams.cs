@@ -3,7 +3,7 @@
 
 Cluster(TEAM,
         5,
-        Persons((StringProperty(TYPE) == STAGE)),
+        Persons(In(StringProperty(TYPE), [SIDE, STAGE])),
         StringProperty(PRETEAM),
         [BalanceConstraint(SIDE,
                            (StringProperty(TYPE) == SIDE),

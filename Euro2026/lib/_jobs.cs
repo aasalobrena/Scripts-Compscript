@@ -36,7 +36,7 @@ Define("DefaultStaffScorers",
         ConsecutiveJobScorer(45, -3, 0),                # mild reward for consecutive jobs (45min window)
         ConsecutiveJobScorer(100, -1000, 0),            # strong reward over 100min window
         MismatchedStationScorer(-10),                   # penalize station changes
-        SolvingSpeedScorer(Switch({1, Round}, EventsToScramblingEvents()),
+        SolvingSpeedScorer(Switch(EventForRound({1, Round}), EventsToScramblingEvents()),
                            {2, AttemptResult},
                            {3, Number},
                            [SCRAMBLER]),                # prefer faster scramblers

@@ -1,5 +1,6 @@
 #include "../lib/_assignment_sets.cs"
 #include "../lib/_constants.cs"
+#include "../lib/_jobs.cs"
 
 # Args:
 # 1: Round
