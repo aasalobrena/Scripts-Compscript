@@ -23,13 +23,13 @@ CreateGroups(_333mbf-r1-a2, 1, SIDEROOM, 2026-07-17T15:20, 2026-07-17T16:35, use
 Map(AllStages(), CreateGroups(_333oh-r1, 6, 2026-07-16T09:00, 2026-07-16T11:15))
 Map(AllStages(), CreateGroups(_777-r1,   2, 2026-07-16T11:15, 2026-07-16T12:15))
 Map(AllStages(), CreateGroups(_444-r1,   6, 2026-07-16T13:40, 2026-07-16T16:10))
-Map(AllStages(), CreateGroups(_clock-r1, 5, 2026-07-16T16:10, 2026-07-16T17:35))
+Map(AllStages(), CreateGroups(_clock-r1, 4, 2026-07-16T16:10, 2026-07-16T17:35))
 Map(AllStages(), CreateGroups(_333oh-r2, 1, 2026-07-16T17:35, 2026-07-16T18:00))
 Map(AllStages(), CreateGroups(_444-r2,   1, 2026-07-16T18:00, 2026-07-16T18:25))
 Map(AllStages(), CreateGroups(_clock-r2, 1, 2026-07-16T18:25, 2026-07-16T18:50))
 
 # Friday
-Map(AllStages(),    CreateGroups(_skewb-r1, 5, 2026-07-17T09:00, 2026-07-17T10:45))
+Map(AllStages(),    CreateGroups(_skewb-r1, 6, 2026-07-17T09:00, 2026-07-17T10:45))
 Map(AllStages(),    CreateGroups(_666-r1,   2, 2026-07-17T10:45, 2026-07-17T11:40))
 Map(AllStages(),    CreateGroups(_333bf-r1, 2, 2026-07-17T11:40, 2026-07-17T12:20))
 Map(AllStages(),    CreateGroups(_sq1-r1,   3, 2026-07-17T13:20, 2026-07-17T14:20))

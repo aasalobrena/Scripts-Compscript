@@ -1,23 +1,22 @@
 #include "../lib/_assignment_sets.cs"
 #include "../lib/_constants.cs"
 #include "../lib/_jobs.cs"
+#include "../lib/_scorers.cs"
+#include "../lib/_unavailabilities.cs"
 
 # Args:
 # 1: Round
-# 2: Simultaneous side room rounds
-# 3: Allowed groups for side roomers to compete
-# 4: Date
-# 5: Number of featured competitors per wave
-# 6: Number of top competitors per round
+# 2: Date
+# 3: Number of top competitors per wave
+# 4: Custom assignment sets
 Define("AssignGroupsR1",
        AssignGroups({1, Round},
-                    NormalRoundAssignmentSets({1, Round},
-                                              {2, Array<Round>},
-                                              {3, Array<Number>},
-                                              {4, Date},
-                                              {5, Number},
-                                              {6, Number}
-                                             ),
+                    Concat({4, Array<AssignmentSet>},
+                           NormalRoundAssignmentSets({1, Round},
+                                                     {2, Date},
+                                                     {3, Number}
+                                                    )
+                          ),
                     [],
                     []
                    )
@@ -34,6 +33,7 @@ Define("AssignStaffR1",
                    (Stage() == StagePerDateAndTeam({2, Date}, {3, Number})),
                    Persons(((NumberProperty(TEAM) == {3, Number}) && Not(In(Weekday({2, Date}), ArrayProperty(UNAVAILABILITY))))),
                    NormalRoundJobs({1, Round}),
-                   DefaultStaffScorers({1, Round}, {4, AttemptResult}, {5, Number})
+                   DefaultStaffScorers({1, Round}, {4, AttemptResult}, {5, Number}),
+                   unavailable=Unavailable(Arg<Person>())
                   )
       )

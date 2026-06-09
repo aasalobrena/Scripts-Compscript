@@ -31,32 +31,15 @@ Define("StagePerDateAndTeam",
 
 ######################################################################
 
-Define("SGSet",
-       AssignmentSet("sg",
-                     (WcaId() == "2022GILB05"),
-                     ((RoundId(Round()) == "444-r1") && (GroupNumber() == (Length(Groups(_444-r1)) / 5)))
-                    )
-      )
-
-# Args:
-# 1: Side rounds
-# 2: Allowed groups in normal round
-Define("SideSet",
-       AssignmentSet("side",
-                     ((Length({1, Array<Round>}) > 0) && ((StringProperty(TYPE) == SIDE) || (Length(Filter({1, Array<Round>}, CompetingInRound())) > 0))),
-                     In(GroupNumber(), {2, Array<Number>})
-                    )
-      )
-
 # Args:
 # 1: Date
 Define("StagesSets",
        Flatten(Map([1, 2, 3, 4, 5],
-                   [AssignmentSet(("leaders" + ToString(Arg<Number>())),
-                                  ((StringProperty(TYPE) == LEADER) && (NumberProperty(TEAM) == Arg<Number>())),
+                   [AssignmentSet(("leaders-" + ToString(Arg<Number>())),
+                                  (In(StringProperty(TYPE), Leader()) && (NumberProperty(TEAM) == Arg<Number>())),
                                   (Stage() == StagePerDateAndTeam({1, Date}, Arg<Number>()))
                                  ),
-                    AssignmentSet(("volunteers" + ToString(Arg<Number>())),
+                    AssignmentSet(("volunteers-" + ToString(Arg<Number>())),
                                   (NumberProperty(TEAM) == Arg<Number>()),
                                   (Stage() == StagePerDateAndTeam({1, Date}, Arg<Number>()))
                                  )
@@ -74,21 +57,10 @@ Define("DataSet",
 
 # Args:
 # 1: Round
-# 2: Number of featured competitors per wave
-Define("FeaturedSet",
-       AssignmentSet("featured",
-                     (Seed({1, Round}, Arg<Person>()) <= ({2, Number} * (Length(Groups({1, Round})) / 5))),
-                     (Stage() == ORANGE),
-                     true
-                    )
-      )
-
-# Args:
-# 1: Round
-# 2: Number of top competitors per round
+# 2: Number of top competitors per wave
 Define("TopSet",
        AssignmentSet("top",
-                     (Seed({1, Round}, Arg<Person>()) <= {2, Number}),
+                     (Seed({1, Round}, Arg<Person>()) <= ({2, Number} * (Length(Groups({1, Round})) / 5))),
                      (Stage() == ORANGE),
                      true
                     )
@@ -103,19 +75,12 @@ Define("EveryoneSet",
 
 # Args:
 # 1: Round
-# 2: Simultaneous side room rounds
-# 3: Allowed groups for side roomers to compete
-# 4: Date
-# 5: Number of featured competitors per wave
-# 6: Number of top competitors per round
+# 2: Date
+# 3: Number of top competitors per wave
 Define("NormalRoundAssignmentSets",
-       Concat([SGSet(),
-               SideSet({2, Array<Round>}, {3, Array<Number>})
-              ],
-              StagesSets({4, Date}),
+       Concat(StagesSets({2, Date}),
               [DataSet(),
-               FeaturedSet({1, Round}, {5, Number}),
-               TopSet({1, Round}, {6, Number}),
+               TopSet({1, Round}, {3, Number}),
                EveryoneSet()
               ]
              )
