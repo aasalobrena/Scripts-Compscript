@@ -6,7 +6,7 @@ Define("Unavailable",
        Concat(If(In(FM, ArrayProperty(SIDETASKS)),
                  [UnavailableBetween(2026-07-16T11:10, 2026-07-16T11:30),
                   UnavailableBetween(2026-07-17T10:45, 2026-07-17T11:05),
-                  UnavailableBetween(2026-07-18T16:15, 2026-07-18T17:15)
+                  UnavailableBetween(2026-07-18T15:00, 2026-07-18T17:15)
                  ], []
                 ),
               If((CompetingIn(_333mbf) && In(StringProperty(TYPE), CoreVolunteer())),

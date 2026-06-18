@@ -1,3 +1,5 @@
+#include "_constants.cs"
+
 Define("ScrambleLimits",
        [Tuple(_333,     30s),
         Tuple(_222,     12s),
@@ -35,18 +37,12 @@ Define("EventsToScramblingEvents",
 
 # Args:
 # 1: Event
+Define("WillingScramble", (In(SCRAMBLER, ArrayProperty(TASKS)) && In(EventId(Switch({1, Event}, EventsToScramblingEvents())), ArrayProperty(SCRAMBLEEVENTS))))
+
+# Args:
+# 1: Event
 Define("CanScramble",
-       ((PersonalBest(Switch({1, Event},
-                            EventsToScramblingEvents()
-                           )
-                    ) <
-                     Switch(Switch({1, Event},
-                                   EventsToScramblingEvents()
-                                  ),
-                            ScrambleLimits()
-                           )) &&
-                             In(EventId(Switch({1, Event}, EventsToScramblingEvents())),
-                                ArrayProperty("scramble-events")
-                               )
-       )
+       ((PersonalBest(Switch({1, Event}, EventsToScramblingEvents())) <
+         Switch(Switch({1, Event}, EventsToScramblingEvents()), ScrambleLimits())
+        ) && WillingScramble({1, Event}))
       )

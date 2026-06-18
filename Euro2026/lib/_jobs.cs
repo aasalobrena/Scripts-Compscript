@@ -18,7 +18,7 @@ Define("DefaultJobs",
            ),
         Job(SCRAMBLER,
             {4, Number},
-            eligibility=(CanScramble(EventForRound({1, Round})) && In(SCRAMBLER, ArrayProperty(TASKS)))
+            eligibility=CanScramble(EventForRound({1, Round}))
            ),
         Job(TABLEMANAGER,
             {5, Number},

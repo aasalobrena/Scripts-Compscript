@@ -16,6 +16,7 @@ Define("FinalsStages",  [GREEN,  ORANGE])
 Define("AllStages",     Concat(Hall123Stages(), Hall5Stages()))
 
 # Properties
+#define SCRAMBLEEVENTS "scramble-events"
 #define PRETEAM "preteam"
 #define SIDETASKS "side-tasks"
 #define TASKS "tasks"
