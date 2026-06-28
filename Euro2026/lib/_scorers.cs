@@ -14,6 +14,12 @@ Define("DefaultStaffScorers",
                            {2, AttemptResult},
                            {3, Number},
                            [SCRAMBLER]),                # prefer faster scramblers
-        FollowingGroupScorer(-50)                       # penalize staffing right after competing
+        FollowingGroupScorer(-50),                      # penalize staffing right after competing
+        ConditionalScorer((Country() == "NL"),
+                          (Date(StartTime()) == 2026-07-16),
+                          (Arg<String>() == TABLEMANAGER),
+                          true,
+                          10
+                         )
        ]
       )

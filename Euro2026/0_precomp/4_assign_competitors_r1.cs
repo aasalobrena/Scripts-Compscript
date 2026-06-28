@@ -16,13 +16,17 @@ AssignGroups(_333mbf-r1, [EveryoneSet()], attemptNumber=2)
 AssignGroupsR1(_333oh-r1, 2026-07-16, 10,
                Concat(Map([1, 2, 3, 4, 5],
                           AssignmentSet(("333fm-cvv-" + ToString(Arg<Number>())),
-                                        ((CompetingIn(_333fm) && (NumberProperty(TEAM) == Arg<Number>())) || In(FM, ArrayProperty(SIDETASKS))),
+                                        ((CompetingIn(_333fm) || In(FM, ArrayProperty(SIDETASKS))) && (NumberProperty(TEAM) == Arg<Number>())),
                                         ((GroupNumber() < 3) && (Stage() == StagePerDateAndTeam(2026-07-16, Arg<Number>())))
                                        )
                          ),
                       [AssignmentSet("333fm-c",
                                      CompetingIn(_333fm),
                                      ((GroupNumber() < 3) && In(Stage(), Hall5Stages()))
+                                    ),
+                       AssignmentSet(BOARD,
+                                     ((StringProperty(TYPE) == BOARD) || In(WcaId(), ["2022HAYL02"])),
+                                     (GroupNumber() == 1)
                                     )
                       ]
                      )
@@ -61,6 +65,10 @@ AssignGroupsR1(_444-r1, 2026-07-16, 10,
                                    AssignmentSet(("333mbf-cv-" + ToString(Arg<Number>())),
                                                  (CompetingIn(_333mbf) && (NumberProperty(TEAM) == Arg<Number>())),
                                                  (In(GroupNumber(), [3, 4]) && (Stage() == StagePerDateAndTeam(2026-07-16, Arg<Number>())))
+                                                ),
+                                   AssignmentSet(("board-" + ToString(Arg<Number>())),
+                                                 (In(WcaId(), ["2014ZAKR01"]) && (NumberProperty(TEAM) == Arg<Number>())),
+                                                 ((GroupNumber() == 4) && (Stage() == StagePerDateAndTeam(2026-07-16, Arg<Number>())))
                                                 )
                                   ]
                                  )
@@ -68,20 +76,34 @@ AssignGroupsR1(_444-r1, 2026-07-16, 10,
                       [AssignmentSet("333mbf-c",
                                      CompetingIn(_333mbf),
                                      (In(GroupNumber(), [3, 4]) && In(Stage(), Hall5Stages()))
+                                    ),
+                       AssignmentSet(BOARD,
+                                     (StringProperty(TYPE) == BOARD),
+                                     (GroupNumber() == 4)
                                     )
                       ]
                      )
               )
 AssignGroupsR1(_clock-r1, 2026-07-16, 10,
-               Concat(Map([1, 2, 3, 4, 5],
-                          AssignmentSet(("333mbf-cvv-" + ToString(Arg<Number>())),
-                                        ((CompetingIn(_333mbf) && (NumberProperty(TEAM) == Arg<Number>())) || In(MBF, ArrayProperty(SIDETASKS))),
-                                        ((GroupNumber() == 4) && (Stage() == StagePerDateAndTeam(2026-07-16, Arg<Number>())))
-                                       )
-                         ),
+               Concat(Flatten(Map([1, 2, 3, 4, 5],
+                                  [AssignmentSet(("333mbf-cvv-" + ToString(Arg<Number>())),
+                                                 ((CompetingIn(_333mbf) || In(MBF, ArrayProperty(SIDETASKS))) && (NumberProperty(TEAM) == Arg<Number>())),
+                                                 ((GroupNumber() == 4) && (Stage() == StagePerDateAndTeam(2026-07-16, Arg<Number>())))
+                                                ),
+                                   AssignmentSet(("board-" + ToString(Arg<Number>())),
+                                                 (In(WcaId(), ["2014ZAKR01"]) && (NumberProperty(TEAM) == Arg<Number>())),
+                                                 ((GroupNumber() == 3) && (Stage() == StagePerDateAndTeam(2026-07-16, Arg<Number>())))
+                                                )
+                                  ]
+                                 )
+                             ),
                       [AssignmentSet("333mbf-c",
                                      CompetingIn(_333mbf),
                                      ((GroupNumber() == 4) && In(Stage(), Hall5Stages()))
+                                    ),
+                       AssignmentSet(BOARD,
+                                     (StringProperty(TYPE) == BOARD),
+                                     (GroupNumber() == 3)
                                     )
                       ]
                      )
@@ -89,26 +111,42 @@ AssignGroupsR1(_clock-r1, 2026-07-16, 10,
 AssignGroupsR1(_skewb-r1, 2026-07-17, 10,
                Concat(Map([1, 2, 3, 4, 5],
                           AssignmentSet(("333fm-cvv-" + ToString(Arg<Number>())),
-                                        ((CompetingIn(_333fm) && (NumberProperty(TEAM) == Arg<Number>())) || In(FM, ArrayProperty(SIDETASKS))),
+                                        ((CompetingIn(_333fm) || In(FM, ArrayProperty(SIDETASKS))) && (NumberProperty(TEAM) == Arg<Number>())),
                                         ((GroupNumber() == 1) && (Stage() == StagePerDateAndTeam(2026-07-17, Arg<Number>())))
                                        )
                          ),
                       [AssignmentSet("333fm-c",
                                      CompetingIn(_333fm),
                                      ((GroupNumber() == 1) && In(Stage(), Hall5Stages()))
+                                    ),
+                       AssignmentSet(BOARD,
+                                     ((StringProperty(TYPE) == BOARD) || In(WcaId(), ["2016MORA24"])),
+                                     (GroupNumber() == 1)
                                     )
                       ]
                      )
               )
 AssignGroupsR1(_666-r1, 2026-07-17, 10,
-               Map([1, 2, 3, 4, 5],
-                   AssignmentSet(("333fm-v-" + ToString(Arg<Number>())),
-                                 (In(FM, ArrayProperty(SIDETASKS)) && (NumberProperty(TEAM) == Arg<Number>())),
-                                 ((GroupNumber() == 2) && (Stage() == StagePerDateAndTeam(2026-07-17, Arg<Number>())))
-                                )
-                  )
+               Concat(Map([1, 2, 3, 4, 5],
+                          AssignmentSet(("333fm-v-" + ToString(Arg<Number>())),
+                                        (In(FM, ArrayProperty(SIDETASKS)) && (NumberProperty(TEAM) == Arg<Number>())),
+                                        ((GroupNumber() == 2) && (Stage() == StagePerDateAndTeam(2026-07-17, Arg<Number>())))
+                                       )
+                         ),
+                      [AssignmentSet(BOARD,
+                                     (StringProperty(TYPE) == BOARD),
+                                     (GroupNumber() == 1)
+                                    )
+                      ]
+                     )
               )
-AssignGroupsR1(_333bf-r1, 2026-07-17, 10, [])
+AssignGroupsR1(_333bf-r1, 2026-07-17, 10,
+               [AssignmentSet(BOARD,
+                              ((StringProperty(TYPE) == BOARD) || In(WcaId(), ["2016WHEA01"])),
+                              (GroupNumber() == 2)
+                             )
+               ]
+              )
 AssignGroupsR1(_sq1-r1, 2026-07-17, 10,
                Concat(Flatten(Map([1, 2, 3, 4, 5],
                                   [AssignmentSet(("333mbf-cv-" + ToString(Arg<Number>())),
@@ -125,6 +163,10 @@ AssignGroupsR1(_sq1-r1, 2026-07-17, 10,
                       [AssignmentSet("333mbf-c",
                                      CompetingIn(_333mbf),
                                      ((GroupNumber() == 3) && In(Stage(), Hall5Stages()))
+                                    ),
+                       AssignmentSet(BOARD,
+                                     (StringProperty(TYPE) == BOARD),
+                                     (GroupNumber() == 3)
                                     )
                       ]
                      )
@@ -140,7 +182,7 @@ AssignGroupsR1(_222-r1, 2026-07-17, 10,
                                                  ((GroupNumber() == 1) && (Stage() == StagePerDateAndTeam(2026-07-17, Arg<Number>())))
                                                 ),
                                    AssignmentSet(("333mbf-cvv-" + ToString(Arg<Number>())),
-                                                 ((CompetingIn(_333mbf) && (NumberProperty(TEAM) == Arg<Number>())) || In(MBF, ArrayProperty(SIDETASKS))),
+                                                 ((CompetingIn(_333mbf) || In(MBF, ArrayProperty(SIDETASKS))) && (NumberProperty(TEAM) == Arg<Number>())),
                                                  ((GroupNumber() < 4) && (Stage() == StagePerDateAndTeam(2026-07-17, Arg<Number>())))
                                                 )
                                   ]
@@ -149,6 +191,10 @@ AssignGroupsR1(_222-r1, 2026-07-17, 10,
                       [AssignmentSet("333mbf-c",
                                      CompetingIn(_333mbf),
                                      ((GroupNumber() < 4) && In(Stage(), Hall5Stages()))
+                                    ),
+                       AssignmentSet(BOARD,
+                                     (StringProperty(TYPE) == BOARD),
+                                     (GroupNumber() == 5)
                                     )
                       ]
                      )
@@ -156,27 +202,41 @@ AssignGroupsR1(_222-r1, 2026-07-17, 10,
 AssignGroupsR1(_minx-r1, 2026-07-17, 10,
                Concat(Map([1, 2, 3, 4, 5],
                           AssignmentSet(("333mbf-cvv-" + ToString(Arg<Number>())),
-                                        ((CompetingIn(_333mbf) && (NumberProperty(TEAM) == Arg<Number>())) || In(MBF, ArrayProperty(SIDETASKS))),
+                                        ((CompetingIn(_333mbf) || In(MBF, ArrayProperty(SIDETASKS))) && (NumberProperty(TEAM) == Arg<Number>())),
                                         ((GroupNumber() > 1) && (Stage() == StagePerDateAndTeam(2026-07-17, Arg<Number>())))
                                        )
                          ),
                       [AssignmentSet("333mbf-c",
                                      CompetingIn(_333mbf),
                                      ((GroupNumber() > 1) && In(Stage(), Hall5Stages()))
+                                    ),
+                       AssignmentSet(BOARD,
+                                     (StringProperty(TYPE) == BOARD),
+                                     (GroupNumber() == 3)
                                     )
                       ]
                      )
               )
 AssignGroupsR1(_555-r1, 2026-07-18, 10,
-               Concat(Map([1, 2, 3, 4, 5],
-                          AssignmentSet(("444bf-cvv-" + ToString(Arg<Number>())),
-                                        ((CompetingIn(_444bf) && (NumberProperty(TEAM) == Arg<Number>())) || In(StringProperty(TYPE), SideVolunteer())),
-                                        ((GroupNumber() == 4) && (Stage() == StagePerDateAndTeam(2026-07-18, Arg<Number>())))
-                                       )
-                         ),
+               Concat(Flatten(Map([1, 2, 3, 4, 5],
+                                  [AssignmentSet(("444bf-cvv-" + ToString(Arg<Number>())),
+                                                 ((CompetingIn(_444bf) || In(StringProperty(TYPE), SideVolunteer())) && (NumberProperty(TEAM) == Arg<Number>())),
+                                                 ((GroupNumber() == 4) && (Stage() == StagePerDateAndTeam(2026-07-18, Arg<Number>())))
+                                                ),
+                                   AssignmentSet(("board-" + ToString(Arg<Number>())),
+                                                 (In(WcaId(), ["2016HOLZ01", "2014MILE01"]) && (NumberProperty(TEAM) == Arg<Number>())),
+                                                 ((GroupNumber() == 1) && (Stage() == StagePerDateAndTeam(2026-07-18, Arg<Number>())))
+                                                )
+                                  ]
+                                 )
+                             ),
                       [AssignmentSet("444bf-c",
                                      CompetingIn(_444bf),
                                      ((GroupNumber() == 4) && In(Stage(), Hall5Stages()))
+                                    ),
+                       AssignmentSet(BOARD,
+                                     ((StringProperty(TYPE) == BOARD) || In(WcaId(), ["2021MOSE02"])),
+                                     (GroupNumber() == 1)
                                     )
                       ]
                      )
@@ -184,13 +244,17 @@ AssignGroupsR1(_555-r1, 2026-07-18, 10,
 AssignGroupsR1(_pyram-r1, 2026-07-18, 10,
                Concat(Map([1, 2, 3, 4, 5],
                            AssignmentSet(("555bf-cvv-" + ToString(Arg<Number>())),
-                                         ((CompetingIn(_555bf) && (NumberProperty(TEAM) == Arg<Number>())) || In(StringProperty(TYPE), SideVolunteer())),
+                                         ((CompetingIn(_555bf) || In(StringProperty(TYPE), SideVolunteer())) && (NumberProperty(TEAM) == Arg<Number>())),
                                          ((GroupNumber() < 3) && (Stage() == StagePerDateAndTeam(2026-07-18, Arg<Number>())))
                                         )
                          ),
                       [AssignmentSet("555bf-c",
                                      CompetingIn(_555bf),
                                      ((GroupNumber() < 3) && In(Stage(), Hall5Stages()))
+                                    ),
+                       AssignmentSet(BOARD,
+                                     ((StringProperty(TYPE) == BOARD) || In(WcaId(), ["2018FOLD01"])),
+                                     (GroupNumber() == 1)
                                     )
                       ]
                      )
@@ -204,6 +268,10 @@ AssignGroupsR1(_333-r1, 2026-07-18, 10,
                                    AssignmentSet(("333fm-cv-" + ToString(Arg<Number>())),
                                                  (CompetingIn(_333fm) && (NumberProperty(TEAM) == Arg<Number>())),
                                                  ((GroupNumber() > 5) && (Stage() == StagePerDateAndTeam(2026-07-18, Arg<Number>())))
+                                                ),
+                                   AssignmentSet(("board-" + ToString(Arg<Number>())),
+                                                 (In(WcaId(), ["2014IFRA01", "2015HENN02"]) && (NumberProperty(TEAM) == Arg<Number>())),
+                                                 ((GroupNumber() == 1) && (Stage() == StagePerDateAndTeam(2026-07-18, Arg<Number>())))
                                                 )
                                   ]
                                  )
@@ -211,71 +279,11 @@ AssignGroupsR1(_333-r1, 2026-07-18, 10,
                       [AssignmentSet("333fm-c",
                                      CompetingIn(_333fm),
                                      ((GroupNumber() > 5) && In(Stage(), Hall5Stages()))
+                                    ),
+                       AssignmentSet(BOARD,
+                                     ((StringProperty(TYPE) == BOARD) || In(WcaId(), ["2015JORG01", "2016BEAU03", "2017KELL08"])),
+                                     (GroupNumber() == 1)
                                     )
                       ]
                      )
               )
-
-ManuallyAssign(Persons((In(FM, ArrayProperty(SIDETASKS)) && (StringProperty(TYPE) == SIDE))),
-               _333fm-r1,
-               SIDEROOM,
-               1,
-               STAFFJUDGE
-              )
-ManuallyAssign(Persons((In(FM, ArrayProperty(SIDETASKS)) && (StringProperty(TYPE) == SIDELEADER))),
-               _333fm-r1,
-               SIDEROOM,
-               1,
-               STAFFDELEGATE
-              )
-ManuallyAssign(Persons((In(MBF, ArrayProperty(SIDETASKS)) && (StringProperty(TYPE) == SIDE))),
-               _333mbf-r1,
-               SIDEROOM,
-               1,
-               STAFFJUDGE
-              )
-ManuallyAssign(Persons((In(MBF, ArrayProperty(SIDETASKS)) && (StringProperty(TYPE) == SIDELEADER))),
-               _333mbf-r1,
-               SIDEROOM,
-               1,
-               STAFFDELEGATE
-              )
-
-ManuallyAssign(Persons((StringProperty(TYPE) == SIDE)),
-               _444bf-r1,
-               SIDEROOM,
-               1,
-               STAFFJUDGE
-              )
-ManuallyAssign(Persons((StringProperty(TYPE) == SIDELEADER)),
-               _444bf-r1,
-               SIDEROOM,
-               1,
-               STAFFDELEGATE
-              )
-ManuallyAssign(Persons((StringProperty(TYPE) == SIDE)),
-               _555bf-r1,
-               SIDEROOM,
-               1,
-               STAFFJUDGE
-              )
-ManuallyAssign(Persons((StringProperty(TYPE) == SIDELEADER)),
-               _555bf-r1,
-               SIDEROOM,
-               1,
-               STAFFDELEGATE
-              )
-
-Map([1, 2, 3, 4, 5], AssignStaffR1(_333oh-r1, 2026-07-16, Arg<Number>(),   15s, 20))
-Map([1, 2, 3, 4, 5], AssignStaffR1(_777-r1,   2026-07-16, Arg<Number>(), 3:00s, 20))
-Map([1, 2, 3, 4, 5], AssignStaffR1(_444-r1,   2026-07-16, Arg<Number>(),   45s, 20))
-Map([1, 2, 3, 4, 5], AssignStaffR1(_clock-r1, 2026-07-16, Arg<Number>(),    6s, 20))
-Map([1, 2, 3, 4, 5], AssignStaffR1(_skewb-r1, 2026-07-17, Arg<Number>(),    6s, 20))
-Map([1, 2, 3, 4, 5], AssignStaffR1(_666-r1,   2026-07-17, Arg<Number>(), 2:50s, 20))
-Map([1, 2, 3, 4, 5], AssignStaffR1(_333bf-r1, 2026-07-17, Arg<Number>(),   15s, 20))
-Map([1, 2, 3, 4, 5], AssignStaffR1(_sq1-r1,   2026-07-17, Arg<Number>(),   15s, 20))
-Map([1, 2, 3, 4, 5], AssignStaffR1(_222-r1,   2026-07-17, Arg<Number>(),    6s, 20))
-Map([1, 2, 3, 4, 5], AssignStaffR1(_minx-r1,  2026-07-17, Arg<Number>(),   45s, 20))
-Map([1, 2, 3, 4, 5], AssignStaffR1(_555-r1,   2026-07-18, Arg<Number>(), 1:00s, 20))
-Map([1, 2, 3, 4, 5], AssignStaffR1(_pyram-r1, 2026-07-18, Arg<Number>(),    6s, 20))
-Map([1, 2, 3, 4, 5], AssignStaffR1(_333-r1,   2026-07-18, Arg<Number>(),   15s, 20))

@@ -42,7 +42,7 @@ Map(FinalsStages(), CreateGroups(_444-r3,   1, 2026-07-17T19:10, 2026-07-17T19:3
 
 # Saturday
 Map(AllStages(),    CreateGroups(_555-r1,   4, 2026-07-18T09:00, 2026-07-18T10:50))
-Map(AllStages(),    CreateGroups(_pyram-r1, 5, 2026-07-18T10:50, 2026-07-18T12:35))
+Map(AllStages(),    CreateGroups(_pyram-r1, 6, 2026-07-18T10:50, 2026-07-18T12:35))
 Map(AllStages(),    CreateGroups(_222-r2,   1, 2026-07-18T13:35, 2026-07-18T13:55))
 Map(AllStages(),    CreateGroups(_minx-r2,  1, 2026-07-18T13:55, 2026-07-18T14:20))
 Map(AllStages(),    CreateGroups(_skewb-r2, 1, 2026-07-18T14:20, 2026-07-18T14:40))

@@ -37,3 +37,23 @@ Define("AssignStaffR1",
                    unavailable=Unavailable(Arg<Person>())
                   )
       )
+
+# Args:
+# 1: Round
+# 2: Side property used
+Define("AssignStaffSide",
+       AssignStaff({1, Round},
+                   true,
+                   Persons(In({2, String}, ArrayProperty(SIDETASKS))),
+                   [Job(JUDGE,
+                        Length(Persons((In({2, String}, ArrayProperty(SIDETASKS)) && (StringProperty(TYPE) == SIDE)))),
+                        eligibility=(StringProperty(TYPE) == SIDE)
+                       ),
+                    Job(DELEGATE,
+                        Length(Persons((In({2, String}, ArrayProperty(SIDETASKS)) && (StringProperty(TYPE) == SIDELEADER)))),
+                        eligibility=(StringProperty(TYPE) == SIDELEADER)
+                       )
+                   ],
+                   []
+                  )
+      )

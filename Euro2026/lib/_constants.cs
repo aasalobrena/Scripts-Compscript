@@ -24,6 +24,7 @@ Define("AllStages",     Concat(Hall123Stages(), Hall5Stages()))
 #define TYPE "type"
 #define UNAVAILABILITY "unavailability"
 
+#define BOARD "board"
 #define DATA "data"
 #define FM "fm"
 #define LEADER "leader"
@@ -43,6 +44,7 @@ Define("StageVolunteer", [LEADER, SIDE, SIDELEADER, STAGE])
 
 # Jobs and roles
 #define DATAENTRY "staff-dataentry"
+#define DELEGATE "delegate"
 #define JUDGE "judge"
 #define RUNNER "runner"
 #define SCRAMBLER "scrambler"
