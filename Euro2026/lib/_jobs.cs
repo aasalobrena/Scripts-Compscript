@@ -7,6 +7,7 @@
 # 3: Number of runners
 # 4: Number of scramblers
 # 5: Number of table managers
+# 6: Number of checkers
 Define("DefaultJobs",
        [Job(JUDGE,
             {2, Number},
@@ -23,10 +24,14 @@ Define("DefaultJobs",
         Job(TABLEMANAGER,
             {5, Number},
             eligibility=In(TABLEMANAGER, ArrayProperty(TASKS))
+           ),
+        Job(CHECKER,
+            {6, Number},
+            eligibility=CanScramble(EventForRound({1, Round}))
            )
        ]
       )
 
 # Args:
 # 1: Round
-Define("NormalRoundJobs", DefaultJobs({1, Round}, 14, 3, 3, 1))
+Define("NormalRoundJobs", DefaultJobs({1, Round}, 14, 3, 3, 1, 0))

@@ -95,6 +95,10 @@ Define("Unavailable",
                   UnavailableBetween(2026-07-17T14:55, 2026-07-17T15:15), # 222-r1-g3
                   UnavailableBetween(2026-07-18T16:35, 2026-07-18T16:55)  # 333-r1-g6
                  ], []
+                ),
+              If((WcaId() == "2014BEGU01"),
+                 [UnavailableBetween(2026-07-19T10:45, 2026-07-19T11:30)  # 333-r2-g3-4
+                 ], []
                 )
              )
       )

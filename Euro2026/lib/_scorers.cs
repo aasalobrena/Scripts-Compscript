@@ -14,12 +14,36 @@ Define("DefaultStaffScorers",
                            {2, AttemptResult},
                            {3, Number},
                            [SCRAMBLER]),                # prefer faster scramblers
-        FollowingGroupScorer(-50),                      # penalize staffing right after competing
-        ConditionalScorer((Country() == "NL"),
-                          (Date(StartTime()) == 2026-07-16),
-                          (Arg<String>() == TABLEMANAGER),
+        FollowingGroupScorer(-50)                       # penalize staffing right after competing
+       ]
+      )
+
+# Args:
+# 1: Round
+# 2: Time result for scrambler scorer
+Define("FinalsScorers",
+       [ConditionalScorer((StringProperty(DELEGATE) == DELEGATE),
                           true,
-                          10
-                         )
+                          true,
+                          true,
+                          999
+                         ),
+        ConditionalScorer((StringProperty(DELEGATE) == JUNIOR),
+                          true,
+                          true,
+                          true,
+                          99
+                         ),
+        ConditionalScorer((StringProperty(DELEGATE) == TRAINEE),
+                          true,
+                          true,
+                          true,
+                          9
+                         ),
+        SolvingSpeedScorer(Switch(EventForRound({1, Round}), EventsToScramblingEvents()),
+                           {2, AttemptResult},
+                           9999,
+                           [SCRAMBLER]),
+        FollowingGroupScorer(-9999)
        ]
       )

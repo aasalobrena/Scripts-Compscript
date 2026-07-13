@@ -91,3 +91,43 @@ Define("NormalRoundAssignmentSets",
               ]
              )
       )
+
+# Args:
+# 1: Round
+Define("SemifinalsAssignmentSets",
+       [AssignmentSet(ORANGE,
+                      (Seed({1, Round}, Arg<Person>()) <= 25),
+                      (Stage() == ORANGE)
+                     ),
+        AssignmentSet(GREEN,
+                      (Seed({1, Round}, Arg<Person>()) <= 50),
+                      (Stage() == GREEN)
+                     ),
+        AssignmentSet(BLUE,
+                      (Seed({1, Round}, Arg<Person>()) <= 75),
+                      (Stage() == BLUE)
+                     ),
+        AssignmentSet(RED,
+                      (Seed({1, Round}, Arg<Person>()) <= 100),
+                      (Stage() == RED)
+                     ),
+        AssignmentSet(YELLOW,
+                      (Seed({1, Round}, Arg<Person>()) <= 125),
+                      (Stage() == YELLOW)
+                     )
+       ]
+      )
+
+# Args:
+# 1: Round
+Define("FinalsAssignmentSets",
+       [AssignmentSet(ORANGE,
+                      In(Country(), ["AL", "AD", "AM", "AT", "AZ", "BY", "BE", "BA", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "GE", "DE", "GR", "HU", "IS", "IE", "IL", "IT", "XK", "LV", "LI", "LT", "LU", "MT", "MD", "MC", "ME", "NL", "MK", "NO", "PL", "PT", "RO", "RU", "SM", "RS", "SK", "SI", "ES", "SE", "CH", "TR", "UA", "GB", "VA"]),
+                      (Stage() == ORANGE)
+                     ),
+        AssignmentSet(GREEN,
+                      true,
+                      (Stage() == GREEN)
+                     )
+       ]
+      )

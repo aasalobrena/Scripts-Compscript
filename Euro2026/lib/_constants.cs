@@ -27,6 +27,7 @@ Define("AllStages",     Concat(Hall123Stages(), Hall5Stages()))
 #define BOARD "board"
 #define DATA "data"
 #define FM "fm"
+#define JUNIOR "junior_delegate"
 #define LEADER "leader"
 #define MBF "mbf"
 #define MBF11 "mbf11"
@@ -36,6 +37,7 @@ Define("AllStages",     Concat(Hall123Stages(), Hall5Stages()))
 #define SIDE "side"
 #define SIDELEADER "sideleader"
 #define STAGE "stage"
+#define TRAINEE "trainee_delegate"
 
 Define("CoreVolunteer", [STAGE, SIDE])
 Define("Leader", [LEADER, SIDELEADER])
@@ -43,6 +45,7 @@ Define("SideVolunteer", [SIDE, SIDELEADER])
 Define("StageVolunteer", [LEADER, SIDE, SIDELEADER, STAGE])
 
 # Jobs and roles
+#define CHECKER "Checker"
 #define DATAENTRY "staff-dataentry"
 #define DELEGATE "delegate"
 #define JUDGE "judge"
