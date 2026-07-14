@@ -116,6 +116,6 @@ Define("AssignStaffFinalsAux",
 # 7: Number of checkers
 Define("AssignStaffFinals",
        [AssignStaffFinalsAux({1, Round}, ORANGE, {2, Date}, {3, AttemptResult}, 14, 3, 3, {7, Number}),
-        AssignStaffFinalsAux({1, Round}, GREEN,  {2, Date}, {3, AttemptResult}, {4, Number}, {5, Number}, {6, Number}, {7, Number})
+        AssignStaffFinalsAux({1, Round}, BLUE,   {2, Date}, {3, AttemptResult}, {4, Number}, {5, Number}, {6, Number}, {7, Number})
        ]
       )

@@ -125,9 +125,9 @@ Define("FinalsAssignmentSets",
                       In(Country(), ["AL", "AD", "AM", "AT", "AZ", "BY", "BE", "BA", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "GE", "DE", "GR", "HU", "IS", "IE", "IL", "IT", "XK", "LV", "LI", "LT", "LU", "MT", "MD", "MC", "ME", "NL", "MK", "NO", "PL", "PT", "RO", "RU", "SM", "RS", "SK", "SI", "ES", "SE", "CH", "TR", "UA", "GB", "VA"]),
                       (Stage() == ORANGE)
                      ),
-        AssignmentSet(GREEN,
+        AssignmentSet(BLUE,
                       true,
-                      (Stage() == GREEN)
+                      (Stage() == BLUE)
                      )
        ]
       )
