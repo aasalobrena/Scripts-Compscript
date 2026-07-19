@@ -112,7 +112,7 @@ Define("SemifinalsAssignmentSets",
                       (Stage() == RED)
                      ),
         AssignmentSet(YELLOW,
-                      (Seed({1, Round}, Arg<Person>()) <= 125),
+                      true,
                       (Stage() == YELLOW)
                      )
        ]
