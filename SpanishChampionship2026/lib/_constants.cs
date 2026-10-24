@@ -14,6 +14,7 @@
 #define RUNNER "runner"
 #define SCRAMBLER "scrambler"
 #define DELEGATE "delegate"
+Define("StandardJobs", [JUDGE, RUNNER, SCRAMBLER, DELEGATE])
 
 # Properties
 #define WEIGHT_JUDGE "weight-judge"
@@ -46,3 +47,7 @@ Define("FinalsStages", [BIZKAIA_STAGE, GIPUZKOA_STAGE])
 #define STREAMING_TEAM "Streaming"
 #define ACCESS_TEAM "Control de Accesos"
 #define DOCTOR_TEAM "Médico"
+#define OTRO_TEAM "Otro"
+Define("AllTeams", [CORE_TEAM, DELEGATE_TEAM,  STAGE_TEAM,  SIDE_TEAM,   AES_TEAM,
+                    DATA_TEAM, STREAMING_TEAM, ACCESS_TEAM, DOCTOR_TEAM, OTRO_TEAM]
+      )

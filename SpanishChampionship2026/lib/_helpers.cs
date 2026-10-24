@@ -32,9 +32,9 @@ Define("TeamWithDelegateCluster", Persons((InTeam({1, Array<String>}) || InDeleg
 Define("CanVolunteer",
        Or(And(CompetingIn({1, Event}),
               Not(IsNull(WcaId())),
-              Not(HasProperty(TEAM))
+              Not(In(StringProperty(TEAM), AllTeams()))
              ),
-          InTeam([STAGE_TEAM, SIDE_TEAM])
+          InTeam([DELEGATE_TEAM, STAGE_TEAM, SIDE_TEAM])
          )
       )
 
@@ -44,15 +44,67 @@ Define("CanVolunteer",
 Define("Volunteers", Persons(CanVolunteer({1, Event})))
 
 # Returns Boolean(Person)
-Define("CanJudge", true) # dummy
+Define("CanJudge", ((NumberProperty(WEIGHT_JUDGE) != -1) && Not(InTeam([DELEGATE_TEAM]))))
 
 # Returns Boolean(Person)
-Define("CanRun", true) # dummy
+Define("CanRun", ((NumberProperty(WEIGHT_RUNNER) != -1) && Not(InTeam([DELEGATE_TEAM]))))
+
+# Returns Array<Tuple<Event, AttemptResult>>
+Define("ScrambleLimits",
+       [Tuple(_333, 20s),
+        Tuple(_222, 8s),
+        Tuple(_444, 1:00s),
+        Tuple(_555, 1:30s),
+        Tuple(_666, 2:45s),
+        Tuple(_777, 4:30s),
+        Tuple(_clock, 10s),
+        Tuple(_minx, 1:30s),
+        Tuple(_pyram, 8s),
+        Tuple(_skewb, 8s),
+        Tuple(_sq1, 20s)
+       ]
+      )
+
+# Returns Array<Tuple<Event, Event>>
+Define("EventsToScramblingEvents",
+       [Tuple(_333, _333),
+        Tuple(_222, _222),
+        Tuple(_444, _444),
+        Tuple(_555, _555),
+        Tuple(_666, _666),
+        Tuple(_777, _777),
+        Tuple(_333bf, _333),
+        Tuple(_333oh, _333),
+        Tuple(_clock, _clock),
+        Tuple(_minx, _minx),
+        Tuple(_pyram, _pyram),
+        Tuple(_skewb, _skewb),
+        Tuple(_sq1, _sq1)
+       ]
+      )
+
+# Returns Event
+# Args:
+# 1: Event
+Define("ScramblingEvent",
+       Switch({1, Event},
+              EventsToScramblingEvents()
+             )
+      )
 
 # Returns Boolean(Person)
 # Args:
 # 1: Event
-Define("CanScramble", true) # dummy
+Define("CanScramble",
+       And((PersonalBest(ScramblingEvent({1, Event})) <
+            Switch(ScramblingEvent({1, Event}),
+                   ScrambleLimits()
+                  )
+           ),
+           (NumberProperty(WEIGHT_SCRAMBLER) != -1),
+           Not(InTeam([DELEGATE_TEAM]))
+          )
+      )
 
 # Returns Boolean(Person)
 Define("CanDelegate", (NumberProperty(DELEGATE_CLUSTER) > 0))
