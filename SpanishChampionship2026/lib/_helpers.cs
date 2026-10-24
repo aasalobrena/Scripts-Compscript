@@ -95,7 +95,50 @@ Define("RoundDate",
 # Returns Number
 # Args:
 # 1: Round
+Define("RoundWaves",
+       Switch({1, Round},
+              [Tuple(_333-r1, 4),   Tuple(_333-r2, 3),   Tuple(_333-r3, 1), Tuple(_333-r4, 8),
+               Tuple(_222-r1, 4),   Tuple(_222-r2, 2),   Tuple(_222-r3, 1),
+               Tuple(_444-r1, 4),   Tuple(_444-r2, 2),   Tuple(_444-r3, 1),
+               Tuple(_555-r1, 2),   Tuple(_555-r2, 1),
+               Tuple(_666-r1, 2),   Tuple(_666-r2, 1),
+               Tuple(_777-r1, 2),   Tuple(_777-r2, 1),
+               Tuple(_333bf-r1, 2), Tuple(_333bf-r2, 1), Tuple(_333bf-r3, 1),
+               Tuple(_333oh-r1, 4), Tuple(_333oh-r2, 1), Tuple(_333oh-r3, 1),
+               Tuple(_clock-r1, 2), Tuple(_clock-r2, 1),
+               Tuple(_minx-r1, 2),  Tuple(_minx-r2, 1),
+               Tuple(_pyram-r1, 3), Tuple(_pyram-r2, 2), Tuple(_pyram-r3, 1),
+               Tuple(_skewb-r1, 3), Tuple(_skewb-r2, 2), Tuple(_skewb-r3, 1),
+               Tuple(_sq1-r1, 2),   Tuple(_sq1-r2, 1),
+               Tuple(_444bf-r1, 1),
+               Tuple(_555bf-r1, 1),
+               Tuple(_333mbf-r1, 1)
+              ]
+             )
+      )
+
+# Returns Number
+# Args:
+# 1: Round
 # 2: Number: Number of competitors per group
 Define("NumberPerGroupToPerRound",
-       ({2, Number} * Length(Groups({1, Round})))
+       ({2, Number} * (Length(Groups({1, Round})) / RoundWaves({1, Round})))
+      )
+
+# Returns Boolean(Person)
+# Args:
+# 1: Round
+# 2: Number: Number of top competitors per group
+Define("IsInTop",
+       (Seed({1, Round}) <= NumberPerGroupToPerRound({1, Round}, {2, Number}))
+      )
+
+# Returns Boolean(Person)
+# Args:
+# 1: Array<Round>
+Define("CompetesOrVolunteersInRound",
+       If((Length({1, Array<Round>}) > 0),
+          (CompetingInRound(At({1, Array<Round>}, 0)) || (NumJobsInRound(At({1, Array<Round>}, 0)) > 0)),
+          false
+         )
       )

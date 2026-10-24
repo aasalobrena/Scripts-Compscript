@@ -2,10 +2,41 @@
 #include "_helpers.cs"
 
 # Returns AssignmentSet
-Define("EveryoneSet",
-       AssignmentSet(EVERYONE_SET,
-                     true,
-                     (Stage() != BIZKAIA_STAGE)
+# Args:
+# 1: Array<Round>: Side Round
+# 2: Array<Number>: Groups to compete in Main Round
+# 3: Round: Main Round
+# 4: Number: Number of top competitors per group
+# 5: Boolean: Featured
+Define("TopSideSet",
+       AssignmentSet((TOP_SIDE_SET + ToString({5, Boolean})),
+                     (IsInTop({3, Round}, {4, Number}) && CompetesOrVolunteersInRound({1, Array<Round>})),
+                     ((Stage() == BIZKAIA_STAGE) && In(GroupNumber(), {2, Array<Number>})),
+                     {5, Boolean}
+                    )
+      )
+
+# Returns AssignmentSet
+# Args:
+# 1: Array<Round>: Side Round
+# 2: Array<Number>: Groups to compete in Main Round
+Define("SideSet",
+       AssignmentSet(SIDE_SET,
+                     CompetesOrVolunteersInRound({1, Array<Round>}),
+                     ((Stage() == ARABA_STAGE) && In(GroupNumber(), {2, Array<Number>}))
+                    )
+      )
+
+# Returns AssignmentSet
+# Args:
+# 1: Round
+# 2: Number: Number of top competitors per group
+# 3: Boolean: Featured
+Define("TopSet",
+       AssignmentSet((TOP_SET + ToString({3, Boolean})),
+                     IsInTop({1, Round}, {2, Number}),
+                     (Stage() == BIZKAIA_STAGE),
+                     {3, Boolean}
                     )
       )
 
@@ -53,36 +84,26 @@ Define("StreamingSet",
       )
 
 # Returns AssignmentSet
-# Args:
-# 1: Round
-# 2: Number: Number of featured competitors per group
-Define("FeaturedSet",
-       AssignmentSet(FEATURED_SET,
-                     (Seed({1, Round}) <= NumberPerGroupToPerRound({1, Round}, {2, Number})),
-                     (Stage() == BIZKAIA_STAGE),
-                     true
-                    )
-      )
-
-# Returns AssignmentSet
-# Args:
-# 1: Round
-# 2: Number: Number of top competitors per group
-Define("TopSet",
-       AssignmentSet(TOP_SET,
-                     (Seed({1, Round}) <= NumberPerGroupToPerRound({1, Round}, {2, Number})),
-                     (Stage() == BIZKAIA_STAGE)
+Define("EveryoneSet",
+       AssignmentSet(EVERYONE_SET,
+                     true,
+                     (Stage() != BIZKAIA_STAGE)
                     )
       )
 
 # Returns Array<AssignmentSet>
 # Args:
-# 1: Round
+# 1: Round: Main Round
 # 2: Number: Number of featured competitors per group
 # 3: Number: Number of top competitors per group
+# 4: Array<Round>: Side Round
+# 5: Array<Number>: Groups for siders to compete in Main Round
 Define("FirstRoundAssignmentSets",
-       [FeaturedSet({1, Round}, {2, Number}),
-        TopSet({1, Round}, {3, Number}),
+       [TopSideSet({4, Array<Round>}, {5, Array<Number>}, {1, Round}, {2, Number}, true),
+        TopSideSet({4, Array<Round>}, {5, Array<Number>}, {1, Round}, {3, Number}, false),
+        SideSet({4, Array<Round>}, {5, Array<Number>}),
+        TopSet({1, Round}, {2, Number}, true),
+        TopSet({1, Round}, {3, Number}, false),
         CoreSet(),
         DelegatesSet(RoundDate({1, Round}), [1, 2]),
         DelegatesSet(RoundDate({1, Round}), [3]),

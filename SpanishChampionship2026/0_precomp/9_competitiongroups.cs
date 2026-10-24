@@ -20,3 +20,8 @@ CreateCompetitionGroupsAssignments(TeamWithDelegateCluster([SIDE_TEAM], [1]),
                                    2026-12-06T09:15,
                                    2026-12-06T09:50
                                   )
+CreateCompetitionGroupsAssignments(TeamWithDelegateCluster([SIDE_TEAM], [1]),
+                                   "3x3x3 Multi-Blind Scrambling",
+                                   2026-12-05T11:40,
+                                   2026-12-05T12:35
+                                  )

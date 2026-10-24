@@ -23,7 +23,7 @@ Map([_444bf-r1, _555bf-r1],
                 true,
                 TeamWithDelegateCluster([STAGE_TEAM, SIDE_TEAM], [1]),
                 [JudgeJob(20), RunnerJob(2), ScramblerJob(2, EventForRound(Arg<Round>())), DelegateJob(1)],
-                scorers(), # dummy
+                [], # dummy
                 unavailable=Unavailable(Arg<Person>())
                )
    )
@@ -31,6 +31,6 @@ AssignStaff(_333mbf-r1,
             true,
             TeamWithDelegateCluster([STAGE_TEAM, SIDE_TEAM], [1]),
             [JudgeJob(10), DelegateJob(1)],
-            scorers(), # dummy
+            [], # dummy
             unavailable=Unavailable(Arg<Person>())
            )
