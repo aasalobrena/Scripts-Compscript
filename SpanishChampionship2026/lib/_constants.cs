@@ -14,13 +14,18 @@
 #define RUNNER "runner"
 #define SCRAMBLER "scrambler"
 #define DELEGATE "delegate"
-Define("StandardJobs", [JUDGE, RUNNER, SCRAMBLER, DELEGATE])
+Define("StandardJobs", [JUDGE, RUNNER, SCRAMBLER])
 
 # Properties
 #define WEIGHT_JUDGE "weight-judge"
 #define WEIGHT_RUNNER "weight-runner"
 #define WEIGHT_SCRAMBLER "weight-scrambler"
 #define DELEGATE_CLUSTER "delegate-cluster"
+#define PUZZLES "puzzles"
+
+# Puzzles
+#define INDIVIDUAL "individual"
+#define PAREJAS "parejas"
 
 # Roles
 #define DATA_ROLE "staff-dataentry"
@@ -33,8 +38,10 @@ Define("StandardJobs", [JUDGE, RUNNER, SCRAMBLER, DELEGATE])
 #define ARABA_STAGE    "Araba"
 #define BIZKAIA_STAGE  "Bizkaia"
 #define GIPUZKOA_STAGE "Gipuzkoa"
-Define("AllStages",    [ARABA_STAGE, BIZKAIA_STAGE, GIPUZKOA_STAGE])
-Define("FinalsStages", [BIZKAIA_STAGE, GIPUZKOA_STAGE])
+Define("AllStages",        [ARABA_STAGE, BIZKAIA_STAGE, GIPUZKOA_STAGE])
+Define("FinalsStages",     [BIZKAIA_STAGE, GIPUZKOA_STAGE])
+Define("AllStagesRoom",    [ARABA_STAGE, BIZKAIA_STAGE, GIPUZKOA_STAGE, MAIN_ROOM])
+Define("FinalsStagesRoom", [BIZKAIA_STAGE, GIPUZKOA_STAGE, MAIN_ROOM])
 
 # Volunteer teams
 #define TEAM "team"

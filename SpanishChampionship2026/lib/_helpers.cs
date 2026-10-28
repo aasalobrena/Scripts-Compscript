@@ -92,14 +92,21 @@ Define("ScramblingEvent",
              )
       )
 
+# Returns AttemptResult
+# Args:
+# 1: Event
+Define("ScrambleLimitForEvent",
+       Switch(ScramblingEvent({1, Event}),
+              ScrambleLimits()
+             )
+      )
+
 # Returns Boolean(Person)
 # Args:
 # 1: Event
 Define("CanScramble",
        And((PersonalBest(ScramblingEvent({1, Event})) <
-            Switch(ScramblingEvent({1, Event}),
-                   ScrambleLimits()
-                  )
+            ScrambleLimitForEvent({1, Event})
            ),
            (NumberProperty(WEIGHT_SCRAMBLER) != -1),
            Not(InTeam([DELEGATE_TEAM]))
@@ -174,7 +181,7 @@ Define("RoundWaves",
 # 1: Round
 # 2: Number: Number of competitors per group
 Define("NumberPerGroupToPerRound",
-       ({2, Number} * (Length(Groups({1, Round})) / RoundWaves({1, Round})))
+       ({2, Number} * RoundWaves({1, Round}))
       )
 
 # Returns Boolean(Person)

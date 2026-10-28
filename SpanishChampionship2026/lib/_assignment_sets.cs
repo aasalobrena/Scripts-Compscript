@@ -20,11 +20,22 @@ Define("TopSideSet",
 # Args:
 # 1: Array<Round>: Side Round
 # 2: Array<Number>: Groups to compete in Main Round
+# 3: String: Stage
 Define("SideSet",
-       AssignmentSet(SIDE_SET,
+       AssignmentSet((SIDE_SET + {3, String}),
                      CompetesOrVolunteersInRound({1, Array<Round>}),
-                     ((Stage() == ARABA_STAGE) && In(GroupNumber(), {2, Array<Number>}))
+                     ((Stage() == {3, String}) && In(GroupNumber(), {2, Array<Number>}))
                     )
+      )
+
+# Returns Array<AssignmentSet>
+# Args:
+# 1: Array<Round>: Side Round
+# 2: Array<Number>: Groups to compete in Main Round
+Define("SideSets",
+       [SideSet({1, Array<Round>}, {2, Array<Number>}, ARABA_STAGE),
+        SideSet({1, Array<Round>}, {2, Array<Number>}, GIPUZKOA_STAGE)
+       ]
       )
 
 # Returns AssignmentSet
@@ -76,18 +87,23 @@ Define("DataSet",
       )
 
 # Returns AssignmentSet
+# Args:
+# 1: String: Stage
 Define("StreamingSet",
-       AssignmentSet(STREAMING_SET,
+       AssignmentSet((STREAMING_SET + {1, String}),
                      InTeam([STREAMING_TEAM]),
-                     (Stage() == ARABA_STAGE)
+                     (Stage() == {1, String})
                     )
       )
+
+# Returns Array<AssignmentSet>
+Define("StreamingSets", [StreamingSet(ARABA_STAGE), StreamingSet(GIPUZKOA_STAGE)])
 
 # Returns AssignmentSet
 Define("EveryoneSet",
        AssignmentSet(EVERYONE_SET,
                      true,
-                     (Stage() != BIZKAIA_STAGE)
+                     Not(In(Stage(), [BIZKAIA_STAGE, MAIN_ROOM]))
                     )
       )
 
@@ -99,18 +115,20 @@ Define("EveryoneSet",
 # 4: Array<Round>: Side Round
 # 5: Array<Number>: Groups for siders to compete in Main Round
 Define("FirstRoundAssignmentSets",
-       [TopSideSet({4, Array<Round>}, {5, Array<Number>}, {1, Round}, {2, Number}, true),
-        TopSideSet({4, Array<Round>}, {5, Array<Number>}, {1, Round}, {3, Number}, false),
-        SideSet({4, Array<Round>}, {5, Array<Number>}),
-        TopSet({1, Round}, {2, Number}, true),
-        TopSet({1, Round}, {3, Number}, false),
-        CoreSet(),
-        DelegatesSet(RoundDate({1, Round}), [1, 2]),
-        DelegatesSet(RoundDate({1, Round}), [3]),
-        DelegatesSet(RoundDate({1, Round}), [4]),
-        AESSet(),
-        DataSet(),
-        StreamingSet(),
-        EveryoneSet()
-       ]
+       Concat([TopSideSet({4, Array<Round>}, {5, Array<Number>}, {1, Round}, {2, Number}, true),
+               TopSideSet({4, Array<Round>}, {5, Array<Number>}, {1, Round}, {3, Number}, false)
+              ],
+              SideSets({4, Array<Round>}, {5, Array<Number>}),
+              [TopSet({1, Round}, {2, Number}, true),
+               TopSet({1, Round}, {3, Number}, false),
+               CoreSet(),
+               DelegatesSet(RoundDate({1, Round}), [1, 2]),
+               DelegatesSet(RoundDate({1, Round}), [3]),
+               DelegatesSet(RoundDate({1, Round}), [4]),
+               AESSet(),
+               DataSet()
+              ],
+              StreamingSets(),
+              [EveryoneSet()]
+             )
       )

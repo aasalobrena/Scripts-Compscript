@@ -29,15 +29,3 @@ Define("ScramblerJob",
 Define("DelegateJob",
        Job(DELEGATE, {1, Number}, eligibility=CanDelegate())
       )
-
-# Returns AssignmentJob
-# Args:
-# 1: Number
-# 2: Stage
-# 3: Date
-Define("StageDelegateJob",
-       Job(DELEGATE,
-           {1, Number},
-           eligibility=(DelegateStage({3, Date}, NumberProperty(DELEGATE_CLUSTER)) == {2, String})
-          )
-      )

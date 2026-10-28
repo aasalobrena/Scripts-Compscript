@@ -1,8 +1,6 @@
 #include "../lib/_assignment_sets.cs"
 #include "../lib/_constants.cs"
 #include "../lib/_helpers.cs"
-#include "../lib/_jobs.cs"
-#include "../lib/_unavailabilities.cs"
 
 # Returns GroupAssignmentResult
 # Args:
@@ -26,13 +24,13 @@ Define("FirstRoundAssignGroups",
                    )
       )
 
-FirstRoundAssignGroups(_clock-r1, [], 5, 20, [_444bf-r1], [1, 2])
+FirstRoundAssignGroups(_clock-r1, [], 5, 20, [_444bf-r1], [1])
 FirstRoundAssignGroups(_777-r1,   [], 5, 11, [_444bf-r1], [2])
 FirstRoundAssignGroups(_sq1-r1,   [], 5, 15, MakeArray<Round>(), [])
 FirstRoundAssignGroups(_666-r1,   [], 5, 13, MakeArray<Round>(), [])
 FirstRoundAssignGroups(_333bf-r1, [], 5, 11, MakeArray<Round>(), [])
-FirstRoundAssignGroups(_555-r1,   [], 5, 19, MakeArray<Round>(), [])
-FirstRoundAssignGroups(_minx-r1,  [], 5, 19, MakeArray<Round>(), [])
+FirstRoundAssignGroups(_555-r1,   [], 5, 19, [_333mbf-r1], [1])
+FirstRoundAssignGroups(_minx-r1,  [], 5, 19, [_333mbf-r1], [2])
 FirstRoundAssignGroups(_pyram-r1,
                        [AssignmentSet("mbf",
                                       (InTeam([SIDE_TEAM]) || InDelegateCluster([1])),
@@ -46,21 +44,3 @@ FirstRoundAssignGroups(_444-r1,   [], 5, 16, [_333mbf-r1], [1, 2])
 FirstRoundAssignGroups(_222-r1,   [], 5, 18, [_333mbf-r1], [3, 4])
 FirstRoundAssignGroups(_skewb-r1, [], 5, 20, [_555bf-r1],  [1, 2])
 FirstRoundAssignGroups(_333-r1,   [], 5, 20, [_555bf-r1],  [4])
-
-# Returns StaffAssignmentResult
-# Args:
-# 1: Round
-# 2: String: Stage
-Define("FirstRoundAssignStaff",
-       AssignStaff({1, Round},
-                   (Stage() == {2, String}),
-                   Volunteers(EventForRound({1, Round})),
-                   [JudgeJob(15),
-                    RunnerJob(2),
-                    ScramblerJob(3, EventForRound({1, Round})),
-                    StageDelegateJob(1, {2, String}, RoundDate({1, Round}))
-                   ],
-                   [], # dummy
-                   unavailable=Unavailable(Arg<Person>())
-                  )
-      )
