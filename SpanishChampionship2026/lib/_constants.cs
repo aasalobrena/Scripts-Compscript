@@ -1,19 +1,21 @@
 # Assignment Sets
 #define TOP_SIDE_SET "top-side-"
-#define SIDE_SET "side"
+#define SIDE_SET "side-"
 #define TOP_SET "top-"
 #define CORE_SET "core"
 #define DELEGATES_SET "delegates-"
 #define AES_SET "aes"
 #define DATA_SET "data"
-#define STREAMING_SET "streaming"
+#define STREAMING_SET "streaming-"
 #define EVERYONE_SET "everyone"
 
 # Jobs
 #define JUDGE "judge"
 #define RUNNER "runner"
 #define SCRAMBLER "scrambler"
+#define CHECKER "Checker"
 #define DELEGATE "delegate"
+#define DATAENTRY "dataentry"
 Define("StandardJobs", [JUDGE, RUNNER, SCRAMBLER])
 
 # Properties
@@ -21,6 +23,7 @@ Define("StandardJobs", [JUDGE, RUNNER, SCRAMBLER])
 #define WEIGHT_RUNNER "weight-runner"
 #define WEIGHT_SCRAMBLER "weight-scrambler"
 #define DELEGATE_CLUSTER "delegate-cluster"
+#define DELEGATE_CLUSTER_EXTRA "delegate-cluster-extra"
 #define PUZZLES "puzzles"
 
 # Puzzles
@@ -38,8 +41,6 @@ Define("StandardJobs", [JUDGE, RUNNER, SCRAMBLER])
 #define ARABA_STAGE    "Araba"
 #define BIZKAIA_STAGE  "Bizkaia"
 #define GIPUZKOA_STAGE "Gipuzkoa"
-Define("AllStages",        [ARABA_STAGE, BIZKAIA_STAGE, GIPUZKOA_STAGE])
-Define("FinalsStages",     [BIZKAIA_STAGE, GIPUZKOA_STAGE])
 Define("AllStagesRoom",    [ARABA_STAGE, BIZKAIA_STAGE, GIPUZKOA_STAGE, MAIN_ROOM])
 Define("FinalsStagesRoom", [BIZKAIA_STAGE, GIPUZKOA_STAGE, MAIN_ROOM])
 

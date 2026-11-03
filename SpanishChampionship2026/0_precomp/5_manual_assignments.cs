@@ -3,8 +3,21 @@
 
 ClearCompetitionGroupsAssignments(Persons(true))
 
-# Side Room Team
+# Puzzles
+ManuallyAssignActivity(304,
+                       Persons(In(INDIVIDUAL,
+                                  ArrayProperty(PUZZLES)
+                                 )
+                              )
+                      )
+ManuallyAssignActivity(305,
+                       Persons(In(PAREJAS,
+                                  ArrayProperty(PUZZLES)
+                                 )
+                              )
+                      )
 
+# Side Room Team
 CreateCompetitionGroupsAssignments(TeamWithDelegateCluster([SIDE_TEAM], [1]),
                                    "Setup Sala Auxiliar",
                                    2026-12-06T08:45,

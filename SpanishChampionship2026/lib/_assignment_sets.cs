@@ -1,6 +1,16 @@
 #include "_constants.cs"
 #include "_helpers.cs"
 
+# Returns Boolean(Person)
+# Args:
+# 1: Array<Round>
+Define("CompetesOrVolunteersInRound",
+       If((Length({1, Array<Round>}) > 0),
+          (CompetingInRound(At({1, Array<Round>}, 0)) || (NumJobsInRound(At({1, Array<Round>}, 0)) > 0)),
+          false
+         )
+      )
+
 # Returns AssignmentSet
 # Args:
 # 1: Array<Round>: Side Round
@@ -28,16 +38,6 @@ Define("SideSet",
                     )
       )
 
-# Returns Array<AssignmentSet>
-# Args:
-# 1: Array<Round>: Side Round
-# 2: Array<Number>: Groups to compete in Main Round
-Define("SideSets",
-       [SideSet({1, Array<Round>}, {2, Array<Number>}, ARABA_STAGE),
-        SideSet({1, Array<Round>}, {2, Array<Number>}, GIPUZKOA_STAGE)
-       ]
-      )
-
 # Returns AssignmentSet
 # Args:
 # 1: Round
@@ -48,14 +48,6 @@ Define("TopSet",
                      IsInTop({1, Round}, {2, Number}),
                      (Stage() == BIZKAIA_STAGE),
                      {3, Boolean}
-                    )
-      )
-
-# Returns AssignmentSet
-Define("CoreSet",
-       AssignmentSet(CORE_SET,
-                     InTeam([CORE_TEAM]),
-                     (Stage() == GIPUZKOA_STAGE)
                     )
       )
 
@@ -71,22 +63,6 @@ Define("DelegatesSet",
       )
 
 # Returns AssignmentSet
-Define("AESSet",
-       AssignmentSet(AES_SET,
-                     InTeam([AES_TEAM]),
-                     (Stage() == GIPUZKOA_STAGE)
-                    )
-      )
-
-# Returns AssignmentSet
-Define("DataSet",
-       AssignmentSet(DATA_SET,
-                     InTeam([DATA_TEAM]),
-                     (Stage() == GIPUZKOA_STAGE)
-                    )
-      )
-
-# Returns AssignmentSet
 # Args:
 # 1: String: Stage
 Define("StreamingSet",
@@ -96,39 +72,10 @@ Define("StreamingSet",
                     )
       )
 
-# Returns Array<AssignmentSet>
-Define("StreamingSets", [StreamingSet(ARABA_STAGE), StreamingSet(GIPUZKOA_STAGE)])
-
 # Returns AssignmentSet
 Define("EveryoneSet",
        AssignmentSet(EVERYONE_SET,
                      true,
                      Not(In(Stage(), [BIZKAIA_STAGE, MAIN_ROOM]))
                     )
-      )
-
-# Returns Array<AssignmentSet>
-# Args:
-# 1: Round: Main Round
-# 2: Number: Number of featured competitors per group
-# 3: Number: Number of top competitors per group
-# 4: Array<Round>: Side Round
-# 5: Array<Number>: Groups for siders to compete in Main Round
-Define("FirstRoundAssignmentSets",
-       Concat([TopSideSet({4, Array<Round>}, {5, Array<Number>}, {1, Round}, {2, Number}, true),
-               TopSideSet({4, Array<Round>}, {5, Array<Number>}, {1, Round}, {3, Number}, false)
-              ],
-              SideSets({4, Array<Round>}, {5, Array<Number>}),
-              [TopSet({1, Round}, {2, Number}, true),
-               TopSet({1, Round}, {3, Number}, false),
-               CoreSet(),
-               DelegatesSet(RoundDate({1, Round}), [1, 2]),
-               DelegatesSet(RoundDate({1, Round}), [3]),
-               DelegatesSet(RoundDate({1, Round}), [4]),
-               AESSet(),
-               DataSet()
-              ],
-              StreamingSets(),
-              [EveryoneSet()]
-             )
       )
