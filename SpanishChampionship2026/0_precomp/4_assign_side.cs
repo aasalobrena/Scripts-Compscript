@@ -4,6 +4,13 @@
 #include "../lib/_jobs.cs"
 #include "../lib/_unavailabilities.cs"
 
+# DEV
+Map([_444bf, _555bf, _333mbf],
+    AddResults(RoundForEvent(1),
+               Persons((PsychSheetPosition() <= 20))
+              )
+   )
+
 # Returns StationAssignmentRule
 # Args:
 # 1: Event
@@ -15,7 +22,9 @@ Define("SideStations",
 Define("SideScorers",
        [JobCountScorer(-50),
         PriorAssignmentScorer(-2, 0, 2026-12-05T00:00),
-        PersonPropertyScorer(InTeam([SIDE_TEAM]), 10000)
+        PersonPropertyScorer(InTeam([SIDE_TEAM]), 10000),
+        PersonPropertyScorer(CompetingIn(_333bf), 100),
+        ComputedWeightScorer(Age(), [JUDGE])
        ]
       )
 

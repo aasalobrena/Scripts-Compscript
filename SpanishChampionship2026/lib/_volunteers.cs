@@ -8,6 +8,7 @@
 # 1: Event
 Define("Volunteers", Persons(Or(And(CompetingIn({1, Event}),
                                     Not(IsNull(WcaId())),
+                                #    Not(IsPossibleNoShow()),
                                     Not(In(StringProperty(TEAM), AllTeams()))
                                    ),
                                 InTeam([DELEGATE_TEAM, STAGE_TEAM, SIDE_TEAM])
@@ -178,6 +179,6 @@ Define("FinalAssignStaff",
                     ],
                     FinalScorers({1, Round}),
                     unavailable=Unavailable(Arg<Person>())
-                   ),
+                   )
        ]
       )

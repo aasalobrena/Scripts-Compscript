@@ -2,47 +2,39 @@
 #include "../lib/_constants.cs"
 #include "../lib/_helpers.cs"
 
+# DEV
+Map([_333, _222, _444, _555, _666, _777, _333bf, _333oh, _clock, _minx, _pyram, _skewb, _sq1],
+    AddResults(RoundForEvent(1),
+               Persons(CompetingIn())
+              )
+   )
+
 # Returns AssignmentSet
 # Args:
-# 1: Round
-# 2: String: Puzzles event
-# 3: Number: Number of top competitors per group
-# 4: Boolean: Featured
+# 1: Number: Number of top competitors per group
+# 2: Boolean: Featured
 Define("TopPuzzlesSet",
-       AssignmentSet(((TOP_SET + {2, String}) + ToString({4, Boolean})),
-                     (IsInTop({1, Round}, {3, Number}) && In({2, String}, ArrayProperty(PUZZLES))),
+       AssignmentSet(((TOP_SET + PUZZLES) + ToString({2, Boolean})),
+                     (IsInTop(_minx-r1, {1, Number}) && In(PAREJAS, ArrayProperty(PUZZLES))),
                      ((GroupNumber() == 1) && (Stage() == BIZKAIA_STAGE)),
-                     {4, Boolean}
+                     {2, Boolean}
                     )
-      )
-
-# Returns Array<AssignmentSet>
-# Args:
-# 1: Round
-# 2: String: Puzzles event
-# 3: Number: Number of featured competitors per group
-# 4: Number: Number of top competitors per group
-Define("PuzzlesAssignmentSets",
-       [TopPuzzlesSet({1, Round}, {2, String}, {3, Number}, true),
-        TopPuzzlesSet({1, Round}, {2, String}, {4, Number}, false),
-        AssignmentSet({2, String},
-                      In({2, String}, ArrayProperty(PUZZLES)),
-                      ((GroupNumber() == 1) && Not(In(Stage(), [BIZKAIA_STAGE, MAIN_ROOM])))
-                     )
-       ]
       )
 
 FirstRoundAssignGroups(_clock-r1, [], 5, 18, [_444bf-r1], [1])
 FirstRoundAssignGroups(_777-r1,   [], 5, 18, [_444bf-r1], [2])
-FirstRoundAssignGroups(_sq1-r1,
-                       [PuzzlesAssignmentSets(_sq1-r1, INDIVIDUAL, 5, 15)],
-                       5, 15, MakeArray<Round>(), []
-                      )
+FirstRoundAssignGroups(_sq1-r1,   [], 5, 15, MakeArray<Round>(), [])
 FirstRoundAssignGroups(_666-r1,   [], 5, 14, MakeArray<Round>(), [])
 FirstRoundAssignGroups(_333bf-r1, [], 5, 18, MakeArray<Round>(), [])
 FirstRoundAssignGroups(_555-r1,   [], 5, 20, [_333mbf-r1], [1])
 FirstRoundAssignGroups(_minx-r1,
-                       [PuzzlesAssignmentSets(_minx-r1, PAREJAS, 5, 19)],
+                       [TopPuzzlesSet(5, true),
+                        TopPuzzlesSet(19, false),
+                        AssignmentSet(PUZZLES,
+                                      In(PAREJAS, ArrayProperty(PUZZLES)),
+                                      ((GroupNumber() == 1) && Not(In(Stage(), [BIZKAIA_STAGE, MAIN_ROOM])))
+                                     )
+                       ],
                        5, 19, [_333mbf-r1], [2]
                       )
 FirstRoundAssignGroups(_pyram-r1,

@@ -20,7 +20,7 @@ Define("Unavailable",
                  []
                 ),
               If(CompetingIn(_333mbf),
-                 [UnavailableBetween(2026-12-05T10:55, 2025-12-05T11:40)],
+                 [UnavailableBetween(2026-12-05T10:55, 2026-12-05T11:40)],
                  []
                 )
              )
