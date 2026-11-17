@@ -3,16 +3,13 @@
 #include "_jobs.cs"
 #include "_unavailabilities.cs"
 
-# Returns Boolean(Person)
-# Args:
-# 1: Event
-Define("Volunteers", Persons(Or(And(CompetingIn({1, Event}),
-                                    Not(IsNull(WcaId())),
-                                #    Not(IsPossibleNoShow()),
-                                    Not(In(StringProperty(TEAM), AllTeams()))
-                                   ),
-                                InTeam([DELEGATE_TEAM, STAGE_TEAM, SIDE_TEAM])
-                               )
+# Returns Array<Person>
+Define("Volunteers", Persons(Not(Or(InTeam([CORE_TEAM, AES_TEAM, STREAMING_TEAM, ACCESS_TEAM, DOCTOR_TEAM, OTRO_TEAM]),
+                                    IsPossibleNoShow(),
+                                    IsNull(WcaId()),
+                                    Not(Registered())
+                                   )
+                                )
                             )
       )
 
@@ -38,101 +35,44 @@ Define("ScrambleSpeedWeight",
 # Args:
 # 1: Round
 Define("Scorers",
-       [JobCountScorer(-50),
-        PriorAssignmentScorer(-5, -1, Midnight(RoundDate({1, Round}))),
-        PriorAssignmentScorer(-2, 0, 2026-12-05T00:00),
-        SameJobScorer(60, -5, 4, StandardJobs()),
-        ConsecutiveJobScorer(90, -3, 0, jobs=StandardJobs()),
-        ConsecutiveJobScorer(30, -5, 0, jobs=[SCRAMBLER]),
-        SolvingSpeedScorer(ScramblingEvent(EventForRound({1, Round})),
-                           ScrambleLimitForEvent(EventForRound({1, Round})),
-                           Switch(EventForRound({1, Round}), ScrambleSpeedWeight()),
-                           [SCRAMBLER]
-                          ),
-        FollowingGroupScorer(-50, maxMinutes=10),
-        PersonPropertyScorer(InTeam([STAGE_TEAM, SIDE_TEAM]), 75),
-        ComputedWeightScorer(If(InTeam([STAGE_TEAM, SIDE_TEAM]),
-                                NumberProperty(WEIGHT_JUDGE),
-                                0),
-                             [JUDGE]
+       [PersonPropertyScorer(Or(CompetingInRound({1, Round}),
+                                InTeam([STAGE_TEAM, SIDE_TEAM, DATA_TEAM, DELEGATE_TEAM])
+                               ),
+                             100000
                             ),
-        ComputedWeightScorer(If(InTeam([STAGE_TEAM, SIDE_TEAM]),
-                                NumberProperty(WEIGHT_RUNNER),
-                                0),
-                             [RUNNER]
-                            ),
-        ComputedWeightScorer(If(InTeam([STAGE_TEAM, SIDE_TEAM]),
-                                NumberProperty(WEIGHT_SCRAMBLER),
-                                0),
-                             [SCRAMBLER]
-                            ),
-        PersonPropertyScorer(CompetingInRound({1, Round}), 1000),
-        PersonPropertyScorer((Stage() == DelegateStage(RoundDate({1, Round}),
-                                                       If((StagesPerRound({1, Round}) == 3),
-                                                          NumberProperty(DELEGATE_CLUSTER),
-                                                          NumberProperty(DELEGATE_CLUSTER_EXTRA)
-                                                         )
-                                                      )
-                             ),
+        PersonPropertyScorer(Or(CompetingIn(EventForRound({1, Round})),
+                                InTeam([STAGE_TEAM, SIDE_TEAM, DATA_TEAM, DELEGATE_TEAM])
+                               ),
                              10000
                             ),
-        ConditionalScorer(CanScramble(EventForRound({1, Round})),
-                          true,
-                          In<String>([JUDGE, RUNNER]),
-                          true,
-                          -50
-                         )
-       ]
-      )
-
-# Returns StaffAssignmentResult
-# Args:
-# 1: Round
-Define("AllStagesAssignStaff",
-       [AssignStaff({1, Round},
-                    (Stage() != MAIN_ROOM),
-                    Volunteers(EventForRound({1, Round})),
-                    [JudgeJob(16),
-                     RunnerJob(3),
-                     ScramblerJob(4, EventForRound({1, Round})),
-                     DelegateJob(1)
-                    ],
-                    Scorers({1, Round}),
-                    unavailable=Unavailable(Arg<Person>())
-                   ),
-        AssignStaff({1, Round},
-                    (Stage() == MAIN_ROOM),
-                    Team([DATA_TEAM]),
-                    [DataentryJob(2)],
-                    Scorers({1, Round}),
-                    unavailable=Unavailable(Arg<Person>())
-                   ),
-        AssignStaff({1, Round},
-                    (Stage() == BIZKAIA_STAGE),
-                    Team([DATA_TEAM]),
-                    [DataentryJob(1)],
-                    Scorers({1, Round}),
-                    unavailable=Unavailable(Arg<Person>())
-                   )
-       ]
-      )
-
-# Returns Array<AssignmentScorer>
-# Args:
-# 1: Round
-Define("FinalScorers",
-       [JobCountScorer(-50),
+        PersonPropertyScorer(Or(And(((Age() >= 14) && (Age() <= 25)),
+                                    (Length(Filter([_clock, _777, _sq1, _666, _333bf, _555, _minx],
+                                                   CompetingIn(Arg<Person>())
+                                                  )
+                                           ) > 0)
+                                   ),
+                                InTeam([STAGE_TEAM, SIDE_TEAM, DATA_TEAM, DELEGATE_TEAM])
+                               ),
+                             1000
+                            ),
+        PersonPropertyScorer(InTeam([STAGE_TEAM, SIDE_TEAM]), 75),
+        JobCountScorer(-50),
         PriorAssignmentScorer(-5, -1, Midnight(RoundDate({1, Round}))),
         PriorAssignmentScorer(-2, 0, 2026-12-05T00:00),
         SameJobScorer(60, -5, 4, StandardJobs()),
-        ConsecutiveJobScorer(90, -3, 0, jobs=StandardJobs()),
+        ConsecutiveJobScorer(60, -100, 0,
+                             jobs=StandardJobs(),
+                             personFilter=InTeam([STAGE_TEAM, SIDE_TEAM])
+                            ),
+        ConsecutiveJobScorer(90, -3, 0,
+                             jobs=StandardJobs(),
+                             personFilter=Not(InTeam([STAGE_TEAM, SIDE_TEAM]))
+                            ),
         SolvingSpeedScorer(ScramblingEvent(EventForRound({1, Round})),
                            ScrambleLimitForEvent(EventForRound({1, Round})),
                            Switch(EventForRound({1, Round}), ScrambleSpeedWeight()),
                            [SCRAMBLER]
                           ),
-        FollowingGroupScorer(-500, maxMinutes=10),
-        PersonPropertyScorer(InTeam([STAGE_TEAM, SIDE_TEAM]), 10000),
         ComputedWeightScorer(If(InTeam([STAGE_TEAM, SIDE_TEAM]),
                                 NumberProperty(WEIGHT_JUDGE),
                                 0),
@@ -154,6 +94,52 @@ Define("FinalScorers",
 # Returns StaffAssignmentResult
 # Args:
 # 1: Round
+Define("AllStagesAssignStaff",
+       AssignStaff({1, Round},
+                   true,
+                   Volunteers(),
+                   [JudgeJob(16),
+                    RunnerJob(3),
+                    ScramblerJob(4, EventForRound({1, Round})),
+                    DelegateJob(1, BIZKAIA_STAGE, {1, Round}),
+                    DelegateJob(1, GIPUZKOA_STAGE, {1, Round}),
+                    DelegateJob(1, ARABA_STAGE, {1, Round}),
+                    DataentryJob(1, BIZKAIA_STAGE),
+                    DataentryJob(2, MAIN_ROOM)
+                   ],
+                   Concat(Scorers({1, Round}),
+                          [ConsecutiveJobScorer(30, -80, 0,
+                                                jobs=[SCRAMBLER],
+                                                personFilter=InTeam([STAGE_TEAM, SIDE_TEAM])
+                                               ),
+                           ConsecutiveJobScorer(30, -5, 0,
+                                                jobs=[SCRAMBLER],
+                                                personFilter=Not(InTeam([STAGE_TEAM, SIDE_TEAM]))
+                                               ),
+                           SolvingSpeedScorer(ScramblingEvent(EventForRound({1, Round})),
+                                              ScrambleLimitForEvent(EventForRound({1, Round})),
+                                              Switch(EventForRound({1, Round}), ScrambleSpeedWeight()),
+                                              [SCRAMBLER]
+                                             ),
+                           FollowingGroupScorer(-50, maxMinutes=10)
+                          ]
+                         ),
+                   unavailable=Unavailable(Arg<Person>())
+                  )
+      )
+
+# Returns Array<AssignmentScorer>
+# Args:
+# 1: Round
+Define("FinalScorers",
+       Concat(Scorers({1, Round}),
+             [FollowingGroupScorer(-500, maxMinutes=10)]
+             )
+      )
+
+# Returns StaffAssignmentResult
+# Args:
+# 1: Round
 # 2: Number: Number of judges in GIPUZKOA_STAGE
 Define("FinalAssignStaff",
        [AssignStaff({1, Round},
@@ -163,7 +149,7 @@ Define("FinalAssignStaff",
                      RunnerJob(3),
                      ScramblerJob(3, EventForRound({1, Round})),
                      CheckerJob(2, EventForRound({1, Round})),
-                     DelegateJob(3)
+                     DelegateJob(3, BIZKAIA_STAGE, {1, Round})
                     ],
                     FinalScorers({1, Round}),
                     unavailable=Unavailable(Arg<Person>())
@@ -175,7 +161,7 @@ Define("FinalAssignStaff",
                      RunnerJob(3),
                      ScramblerJob(2, EventForRound({1, Round})),
                      CheckerJob(1, EventForRound({1, Round})),
-                     DelegateJob(2)
+                     DelegateJob(2, GIPUZKOA_STAGE, {1, Round})
                     ],
                     FinalScorers({1, Round}),
                     unavailable=Unavailable(Arg<Person>())

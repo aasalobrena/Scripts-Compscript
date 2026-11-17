@@ -7,7 +7,8 @@
 Define("JudgeJob",
        Job(JUDGE,
            {1, Number},
-           eligibility=((NumberProperty(WEIGHT_JUDGE) != -1) && Not(InTeam([DELEGATE_TEAM])))
+           eligibility=((NumberProperty(WEIGHT_JUDGE) != -1) && Not(InTeam([DELEGATE_TEAM, DATA_TEAM]))),
+           groupFilter=(Stage() != MAIN_ROOM)
           )
       )
 
@@ -17,7 +18,8 @@ Define("JudgeJob",
 Define("RunnerJob",
        Job(RUNNER,
            {1, Number},
-           eligibility=((NumberProperty(WEIGHT_RUNNER) != -1) && Not(InTeam([DELEGATE_TEAM])))
+           eligibility=((NumberProperty(WEIGHT_RUNNER) != -1) && Not(InTeam([DELEGATE_TEAM, DATA_TEAM]))),
+           groupFilter=(Stage() != MAIN_ROOM)
           )
       )
 
@@ -26,7 +28,11 @@ Define("RunnerJob",
 # 1: Number
 # 2: Event
 Define("ScramblerJob",
-       Job(SCRAMBLER, {1, Number}, eligibility=CanScramble({2, Event}))
+       Job(SCRAMBLER,
+           {1, Number},
+           eligibility=CanScramble({2, Event}),
+           groupFilter=(Stage() != MAIN_ROOM)
+          )
       )
 
 # Returns AssignmentJob
@@ -34,25 +40,40 @@ Define("ScramblerJob",
 # 1: Number
 # 2: Event
 Define("CheckerJob",
-       Job(CHECKER, {1, Number}, eligibility=CanScramble({2, Event}))
-      )
-
-# Returns AssignmentJob
-# Args:
-# 1: Number
-Define("DelegateJob",
-       Job(DELEGATE,
+       Job(CHECKER,
            {1, Number},
-           eligibility=(NumberProperty(DELEGATE_CLUSTER) > 0)
+           eligibility=CanScramble({2, Event}),
+           groupFilter=(Stage() != MAIN_ROOM)
           )
       )
 
 # Returns AssignmentJob
 # Args:
 # 1: Number
+# 2: String: Stage
+# 3: Round
+Define("DelegateJob",
+       Job(DELEGATE,
+           {1, Number},
+           eligibility=(DelegateStage(Date(RoundStartTime({3, Round})),
+                                      NumberProperty(If((StagesPerRound({3, Round}) == 3),
+                                                        DELEGATE_CLUSTER,
+                                                        DELEGATE_CLUSTER_EXTRA
+                                                       )
+                                                    )
+                                     ) == {2, String}),
+           groupFilter=(Stage() == {2, String})
+          )
+      )
+
+# Returns AssignmentJob
+# Args:
+# 1: Number
+# 2: String: Stage
 Define("DataentryJob",
        Job(DATAENTRY,
            {1, Number},
-           eligibility=InTeam([DATA_TEAM])
+           eligibility=InTeam([DATA_TEAM]),
+           groupFilter=(Stage() == {2, String})
           )
       )

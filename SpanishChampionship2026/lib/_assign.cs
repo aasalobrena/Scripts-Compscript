@@ -52,6 +52,43 @@ Define("FirstRoundAssignGroups",
 
 # Returns GroupAssignmentResult
 # Args:
+# 1: Round: Round to assign
+# 2: Array<AssignmentSet>: Extra Assignment Sets
+# 3: Number: Number of featured competitors per group
+# 4: Number: Number of top competitors per group
+# 5: Array<Round>: Side Round
+# 6: Array<Number>: Groups for siders to compete
+Define("FirstRoundAssignGroups2",
+       AssignGroups({1, Round},
+                    Concat({2, Array<AssignmentSet>},
+                           [TopSideSet({5, Array<Round>}, {6, Array<Number>}, {1, Round}, {3, Number}, true),
+                            TopSideSet({5, Array<Round>}, {6, Array<Number>}, {1, Round}, {4, Number}, false),
+                            SideSet({5, Array<Round>}, {6, Array<Number>}, ARABA_STAGE),
+                            SideSet({5, Array<Round>}, {6, Array<Number>}, GIPUZKOA_STAGE),
+                            TopSet({1, Round}, {3, Number}, true),
+                            TopSet({1, Round}, {4, Number}, false),
+                            AssignmentSet(CORE_SET,
+                                          InTeam([CORE_TEAM]),
+                                          (Stage() == GIPUZKOA_STAGE)
+                                         )
+                           ],
+                           If((StagesPerRound({1, Round}) == 3),
+                              [DelegatesSet(RoundDate({1, Round}), [1, 2]),
+                               DelegatesSet(RoundDate({1, Round}), [3]),
+                               DelegatesSet(RoundDate({1, Round}), [4])
+                              ],
+                              [DelegatesSet(RoundDate({1, Round}), [5]),
+                               DelegatesSet(RoundDate({1, Round}), [6])
+                              ]
+                             )
+                          ),
+                    [], []
+                   )
+      )
+
+
+# Returns GroupAssignmentResult
+# Args:
 # 1: Round
 Define("SecondRoundAssignGroups",
        AssignGroups({1, Round},

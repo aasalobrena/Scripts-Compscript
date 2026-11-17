@@ -5,11 +5,11 @@
 #include "../lib/_unavailabilities.cs"
 
 # DEV
-Map([_444bf, _555bf, _333mbf],
-    AddResults(RoundForEvent(1),
-               Persons((PsychSheetPosition() <= 20))
-              )
-   )
+# Map([_444bf, _555bf, _333mbf],
+#     AddResults(RoundForEvent(1),
+#                Persons((PsychSheetPosition() <= 20))
+#               )
+#    )
 
 # Returns StationAssignmentRule
 # Args:
@@ -58,11 +58,22 @@ Map([1, 2],
     AssignGroups(_333mbf-r1, [EveryoneSet()], stationRules=[SideStations(_333mbf)], attemptNumber=Arg<Number>())
    )
 
+Define("SideDelegateJob",
+       Job(DELEGATE,
+           1,
+           eligibility=(NumberProperty(DELEGATE_CLUSTER) == 1)
+          )
+      )
+
 Map([_444bf-r1, _555bf-r1],
     AssignStaff(Arg<Round>(),
                 true,
                 TeamWithDelegateCluster([STAGE_TEAM, SIDE_TEAM], [1]),
-                [JudgeJob(20), RunnerJob(2), ScramblerJob(2, EventForRound(Arg<Round>())), DelegateJob(1)],
+                [JudgeJob(20),
+                 RunnerJob(2),
+                 ScramblerJob(2, EventForRound(Arg<Round>())),
+                 SideDelegateJob()
+                ],
                 Concat(SideScorers(),
                        BigBfScorers(Arg<Round>())
                       ),
@@ -72,7 +83,7 @@ Map([_444bf-r1, _555bf-r1],
 AssignStaff(_333mbf-r1,
             true,
             TeamWithDelegateCluster([STAGE_TEAM, SIDE_TEAM], [1]),
-            [JudgeJob(10), DelegateJob(1)],
+            [JudgeJob(10), SideDelegateJob()],
             SideScorers(),
             unavailable=Unavailable(Arg<Person>())
            )

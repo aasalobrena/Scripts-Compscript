@@ -35,7 +35,7 @@ Define("ScrambleLimits",
         Tuple(_444, 1:00s),
         Tuple(_555, 1:30s),
         Tuple(_666, 2:45s),
-        Tuple(_777, 4:30s),
+        Tuple(_777, 5:00s),
         Tuple(_clock, 10s),
         Tuple(_minx, 1:30s),
         Tuple(_pyram, 8s),
@@ -90,7 +90,7 @@ Define("CanScramble",
             ScrambleLimitForEvent({1, Event})
            ),
            (NumberProperty(WEIGHT_SCRAMBLER) != -1),
-           Not(InTeam([DELEGATE_TEAM]))
+           Not(InTeam([DELEGATE_TEAM, DATA_TEAM]))
           )
       )
 # Returns Number(Person)
@@ -110,9 +110,31 @@ Define("Seed",
 Define("DelegateStage",
        Switch({2, Number},
               Switch({1, Date},
-                     [Tuple(2026-12-05, [Tuple(1, BIZKAIA_STAGE),  Tuple(2, BIZKAIA_STAGE),  Tuple(3, GIPUZKOA_STAGE), Tuple(4, ARABA_STAGE),   Tuple(5, BIZKAIA_STAGE),  Tuple(6, GIPUZKOA_STAGE)]),
-                      Tuple(2026-12-06, [Tuple(1, GIPUZKOA_STAGE), Tuple(2, GIPUZKOA_STAGE), Tuple(3, ARABA_STAGE),    Tuple(4, BIZKAIA_STAGE), Tuple(5, GIPUZKOA_STAGE), Tuple(6, BIZKAIA_STAGE)]),
-                      Tuple(2026-12-07, [Tuple(1, ARABA_STAGE),    Tuple(2, ARABA_STAGE),    Tuple(3, BIZKAIA_STAGE),  Tuple(4, GIPUZKOA_STAGE)])
+                     [Tuple(2026-12-05,
+                            [Tuple(1, ARABA_STAGE),
+                             Tuple(2, ARABA_STAGE),
+                             Tuple(3, BIZKAIA_STAGE),
+                             Tuple(4, GIPUZKOA_STAGE),
+                             Tuple(5, GIPUZKOA_STAGE),
+                             Tuple(6, BIZKAIA_STAGE)
+                            ]
+                           ),
+                      Tuple(2026-12-06,
+                            [Tuple(1, GIPUZKOA_STAGE),
+                             Tuple(2, GIPUZKOA_STAGE),
+                             Tuple(3, ARABA_STAGE),
+                             Tuple(4, BIZKAIA_STAGE),
+                             Tuple(5, BIZKAIA_STAGE),
+                             Tuple(6, GIPUZKOA_STAGE)
+                            ]
+                           ),
+                      Tuple(2026-12-07,
+                            [Tuple(1, BIZKAIA_STAGE),
+                             Tuple(2, BIZKAIA_STAGE),
+                             Tuple(3, GIPUZKOA_STAGE),
+                             Tuple(4, ARABA_STAGE)
+                            ]
+                           )
                      ]
                     )
              )
@@ -177,4 +199,13 @@ Define("FinalsSeed",
                                    Seed({1, Round})
                                   )
              ) + 1)
+      )
+
+# Returns Boolean(Person)
+# Args:
+# 1: String: Puzzles Event
+Define("CompetingInPuzzles",
+       In({1, String},
+          ArrayProperty(PUZZLES)
+         )
       )
