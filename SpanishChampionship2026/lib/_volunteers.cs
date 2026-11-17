@@ -49,7 +49,10 @@ Define("Scorers",
                                     (Length(Filter([_clock, _777, _sq1, _666, _333bf, _555, _minx],
                                                    CompetingIn(Arg<Person>())
                                                   )
-                                           ) > 0)
+                                           ) > 0),
+                                    And((RoundNumber({1, Round}) == 1),
+                                        (RoundWaves({1, Round}) == 2)
+                                       )
                                    ),
                                 InTeam([STAGE_TEAM, SIDE_TEAM, DATA_TEAM, DELEGATE_TEAM])
                                ),

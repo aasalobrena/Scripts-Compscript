@@ -32,7 +32,7 @@ FirstRoundAssignGroups(_clock-r1,
                                       true
                                      )
                        ],
-                       4, 22, [_444bf-r1], [1]
+                       4, 21, [_444bf-r1], [1]
                       )
 
 FirstRoundAssignGroups(_777-r1,
@@ -52,7 +52,7 @@ FirstRoundAssignGroups(_sq1-r1,
                                       true
                                      )
                        ],
-                       4, 19, MakeArray<Round>(), []
+                       4, 18, MakeArray<Round>(), []
                       )
 
 FirstRoundAssignGroups(_666-r1,
@@ -99,7 +99,7 @@ FirstRoundAssignGroups(_555-r1,
 
 FirstRoundAssignGroups(_minx-r1,
                        [TopPuzzlesSet(4, true),
-                        TopPuzzlesSet(19, false),
+                        TopPuzzlesSet(25, false),
                         AssignmentSet(PUZZLES,
                                       In(PAREJAS, ArrayProperty(PUZZLES)),
                                       ((GroupNumber() == 1) && Not(In(Stage(), [BIZKAIA_STAGE, MAIN_ROOM])))
@@ -143,7 +143,7 @@ FirstRoundAssignGroups(_444-r1,
                                       ((Stage() == BIZKAIA_STAGE) && (GroupNumber() == 4))
                                      )
                        ],
-                       4, 20, [_333mbf-r1], [1, 2]
+                       4, 18, [_333mbf-r1], [1, 2]
                       )
 
 FirstRoundAssignGroups(_222-r1, [], 4, 23, [_333mbf-r1], [3, 4])
