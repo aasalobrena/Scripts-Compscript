@@ -93,6 +93,7 @@ Define("CanScramble",
            Not(InTeam([DELEGATE_TEAM, DATA_TEAM]))
           )
       )
+
 # Returns Number(Person)
 # Args:
 # 1: Round
