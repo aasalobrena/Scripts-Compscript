@@ -63,7 +63,7 @@ Define("Scorers",
         PriorAssignmentScorer(-5, -1, Midnight(RoundDate({1, Round}))),
         PriorAssignmentScorer(-3, 0, 2026-12-05T00:00),
         SameJobScorer(60, -5, 4, StandardJobs()),
-        ConsecutiveJobScorer(60, -300, -10,
+        ConsecutiveJobScorer(60, -120000, 0,
                              jobs=StandardJobs(),
                              personFilter=InTeam([STAGE_TEAM, SIDE_TEAM])
                             ),
@@ -136,7 +136,9 @@ Define("AllStagesAssignStaff",
 # 1: Round
 Define("FinalScorers",
        Concat(Scorers({1, Round}),
-             [FollowingGroupScorer(-500, maxMinutes=10)]
+             [FollowingGroupScorer(-500, maxMinutes=10),
+              PersonPropertyScorer(InTeam([STAGE_TEAM, SIDE_TEAM]), 100000)
+             ]
              )
       )
 
@@ -144,9 +146,10 @@ Define("FinalScorers",
 # Args:
 # 1: Round
 # 2: Number: Number of judges in GIPUZKOA_STAGE
+# 3: Boolean: Assign Bizkaia
 Define("FinalAssignStaff",
        [AssignStaff({1, Round},
-                    (Stage() == BIZKAIA_STAGE),
+                    And({3, Boolean}, (Stage() == BIZKAIA_STAGE)),
                     Volunteers(),
                     [JudgeJob(15),
                      RunnerJob(3),

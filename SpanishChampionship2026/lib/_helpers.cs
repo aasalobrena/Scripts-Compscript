@@ -34,7 +34,7 @@ Define("ScrambleLimits",
         Tuple(_222, 8s),
         Tuple(_444, 1:00s),
         Tuple(_555, 1:30s),
-        Tuple(_666, 2:45s),
+        Tuple(_666, 3:00s),
         Tuple(_777, 5:00s),
         Tuple(_clock, 10s),
         Tuple(_minx, 1:30s),
@@ -128,13 +128,6 @@ Define("DelegateStage",
                              Tuple(5, BIZKAIA_STAGE),
                              Tuple(6, GIPUZKOA_STAGE)
                             ]
-                           ),
-                      Tuple(2026-12-07,
-                            [Tuple(1, BIZKAIA_STAGE),
-                             Tuple(2, BIZKAIA_STAGE),
-                             Tuple(3, GIPUZKOA_STAGE),
-                             Tuple(4, ARABA_STAGE)
-                            ]
                            )
                      ]
                     )
@@ -189,17 +182,6 @@ Define("IsInTop",
 # 1: Round
 Define("StagesPerRound",
        ((Length(Groups({1, Round})) / RoundWaves({1, Round})) - 1)
-      )
-
-# Returns Number(Person)
-# Args:
-# 1: Round
-Define("FinalsSeed",
-       (Index(Sort<Person, Number>(Persons(CompetingInRound({1, Round})),
-                                   If((Country() == "ES"), 0, 1),
-                                   Seed({1, Round})
-                                  )
-             ) + 1)
       )
 
 # Returns Boolean(Person)

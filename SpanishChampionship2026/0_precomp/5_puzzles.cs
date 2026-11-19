@@ -2,5 +2,5 @@
 #include "../lib/_helpers.cs"
 
 # Puzzles
-ManuallyAssignActivity(300, Persons(CompetingInPuzzles(INDIVIDUAL)))
-ManuallyAssignActivity(301, Persons(CompetingInPuzzles(PAREJAS)))
+ManuallyAssignActivity(283, Persons(CompetingInPuzzles(INDIVIDUAL)))
+ManuallyAssignActivity(284, Persons(CompetingInPuzzles(PAREJAS)))

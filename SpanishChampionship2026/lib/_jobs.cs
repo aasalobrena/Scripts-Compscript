@@ -55,13 +55,16 @@ Define("CheckerJob",
 Define("DelegateJob",
        Job(DELEGATE,
            {1, Number},
-           eligibility=(DelegateStage(Date(RoundStartTime({3, Round})),
-                                      NumberProperty(If((StagesPerRound({3, Round}) == 3),
-                                                        DELEGATE_CLUSTER,
-                                                        DELEGATE_CLUSTER_EXTRA
+           eligibility=If((RoundNumber({3, Round}) == 1),
+                          (DelegateStage(Date(RoundStartTime({3, Round})),
+                                         NumberProperty(If((StagesPerRound({3, Round}) == 3),
+                                                           DELEGATE_CLUSTER,
+                                                           DELEGATE_CLUSTER_EXTRA
+                                                          )
                                                        )
-                                                    )
-                                     ) == {2, String}),
+                                        ) == {2, String}),
+                          InTeam([DELEGATE_TEAM])
+                         ),
            groupFilter=(Stage() == {2, String})
           )
       )

@@ -57,16 +57,7 @@ Map(FinalsStagesRoom(), CreateGroups(_444-r3,   RoundWaves(_444-r3),   2026-12-0
 Map(FinalsStagesRoom(), CreateGroups(_222-r3,   RoundWaves(_222-r3),   2026-12-07T16:15, 2026-12-07T16:35))
 
 CreateGroups(_333-r4, 1, GIPUZKOA_STAGE, 2026-12-07T16:50, 2026-12-07T17:10)
-Map(FinalsStagesRoom(), CreateGroups(_333-r4, (RoundWaves(_333-r4) - 1), 2026-12-07T17:10, 2026-12-07T18:10, [1],
-                                     extraMinutesByGroup=[Tuple(2, 10),
-                                                          Tuple(3, 10),
-                                                          Tuple(4, 10),
-                                                          Tuple(5, 10),
-                                                          Tuple(6, 10),
-                                                          Tuple(7, 10)
-                                                         ]
-                                    )
-   )
+CreateGroups(_333-r4, 1, BIZKAIA_STAGE,  2026-12-07T17:10, 2026-12-07T18:10)
 
 # Misc
 CreateMiscActivity("Registro",   "other-checkin", MAIN_ROOM, 2026-12-05T08:30, 2026-12-05T09:00)

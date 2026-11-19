@@ -20,7 +20,8 @@ Define("Unavailable",
                                         ]
                            ),
                       Tuple(2019GEAA01, [UnavailableForDate(2026-12-05)]),                         # Albert Garriga Gea
-                      Tuple(2024VILL45, [UnavailableForDate(2026-12-05)])                          # Ashtonn Villain
+                      Tuple(2024VILL45, [UnavailableForDate(2026-12-05)]),                         # Ashtonn Villain
+                      Tuple(2023MONT04, [UnavailableBetween(2026-12-05T09:00, 2026-12-05T10:00)])  # Miguel Martínez Montañes
                      ],
                      defaultValue=[]
                     ),
