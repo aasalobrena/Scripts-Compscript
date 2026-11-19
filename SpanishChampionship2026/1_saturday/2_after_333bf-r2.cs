@@ -9,5 +9,5 @@ Map([_minx-r2, _333bf-r3],
     FinalAssignGroups(Arg<Round>())
    )
 
-FinalAssignStaff(_minx-r2,  x, true)
-FinalAssignStaff(_333bf-r3, x, true)
+FinalAssignStaff(_minx-r2,  x)
+FinalAssignStaff(_333bf-r3, x)

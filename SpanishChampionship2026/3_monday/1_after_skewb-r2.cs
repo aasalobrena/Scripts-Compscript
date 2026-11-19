@@ -11,7 +11,7 @@ Map([_444-r3, _222-r3, _333oh-r3, _skewb-r3],
     FinalAssignGroups(Arg<Round>())
    )
 
-FinalAssignStaff(_skewb-r3, x, true)
-FinalAssignStaff(_333oh-r3, x, true)
-FinalAssignStaff(_444-r3,   x, true)
-FinalAssignStaff(_222-r3,   x, true)
+FinalAssignStaff(_skewb-r3, x)
+FinalAssignStaff(_333oh-r3, x)
+FinalAssignStaff(_444-r3,   x)
+FinalAssignStaff(_222-r3,   x)

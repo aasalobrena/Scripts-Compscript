@@ -13,24 +13,6 @@ Define("Volunteers", Persons(Not(Or(InTeam([CORE_TEAM, AES_TEAM, STREAMING_TEAM,
                             )
       )
 
-# Returns Array<Tuple<Event, Number>>
-Define("ScrambleSpeedWeight",
-       [Tuple(_333,   3),
-        Tuple(_222,   3),
-        Tuple(_444,   5),
-        Tuple(_555,   5),
-        Tuple(_666,   8),
-        Tuple(_777,   8),
-        Tuple(_sq1,   5),
-        Tuple(_clock, 5),
-        Tuple(_pyram, 3),
-        Tuple(_minx,  8),
-        Tuple(_skewb, 3),
-        Tuple(_333bf, 1),
-        Tuple(_333oh, 1)
-       ]
-      )
-
 # Returns Array<AssignmentScorer>
 # Args:
 # 1: Round
@@ -146,10 +128,9 @@ Define("FinalScorers",
 # Args:
 # 1: Round
 # 2: Number: Number of judges in GIPUZKOA_STAGE
-# 3: Boolean: Assign Bizkaia
 Define("FinalAssignStaff",
        [AssignStaff({1, Round},
-                    And({3, Boolean}, (Stage() == BIZKAIA_STAGE)),
+                    (Stage() == BIZKAIA_STAGE),
                     Volunteers(),
                     [JudgeJob(15),
                      RunnerJob(3),

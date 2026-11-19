@@ -34,4 +34,4 @@ AssignGroups(_333oh-r2,
 Map([_333-r2, _444-r2, _222-r2, _333oh-r2, _skewb-r2],
     AllStagesAssignStaff(Arg<Round>())
    )
-FinalAssignStaff(_pyram-r3, x, true)
+FinalAssignStaff(_pyram-r3, x)

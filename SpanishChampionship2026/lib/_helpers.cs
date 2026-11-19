@@ -100,7 +100,10 @@ Define("CanScramble",
 Define("Seed",
        If((RoundNumber({1, Round}) == 1),
           PsychSheetPosition(EventForRound({1, Round})),
-          RoundPosition(PreviousRound({1, Round}))
+          (Index(Sort<Person, Number>(Persons(CompetingInRound({1, Round})),
+                                      RoundPosition(PreviousRound({1, Round}))
+                                     )
+                ) + 1)
          )
       )
 
@@ -191,4 +194,22 @@ Define("CompetingInPuzzles",
        In({1, String},
           ArrayProperty(PUZZLES)
          )
+      )
+
+# Returns Array<Tuple<Event, Number>>
+Define("ScrambleSpeedWeight",
+       [Tuple(_333,   3),
+        Tuple(_222,   3),
+        Tuple(_444,   5),
+        Tuple(_555,   5),
+        Tuple(_666,   8),
+        Tuple(_777,   8),
+        Tuple(_sq1,   5),
+        Tuple(_clock, 5),
+        Tuple(_pyram, 3),
+        Tuple(_minx,  8),
+        Tuple(_skewb, 3),
+        Tuple(_333bf, 1),
+        Tuple(_333oh, 1)
+       ]
       )

@@ -25,7 +25,7 @@ AssignGroups(_333bf-r2,
             )
 
 AllStagesAssignStaff(_333bf-r2)
-FinalAssignStaff(_777-r2,   x, true)
-FinalAssignStaff(_clock-r2, x, true)
-FinalAssignStaff(_sq1-r2,   x, true)
-FinalAssignStaff(_666-r2,   x, true)
+FinalAssignStaff(_777-r2,   x)
+FinalAssignStaff(_clock-r2, x)
+FinalAssignStaff(_sq1-r2,   x)
+FinalAssignStaff(_666-r2,   x)

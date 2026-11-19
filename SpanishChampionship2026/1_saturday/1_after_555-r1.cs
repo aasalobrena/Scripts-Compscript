@@ -5,4 +5,4 @@
 # AddResults(_555-r2, Persons((PsychSheetPosition(_555) <= 27)))
 
 FinalAssignGroups(_555-r2)
-FinalAssignStaff(_555-r2, x, true)
+FinalAssignStaff(_555-r2, x)
