@@ -1,3 +1,10 @@
+# Assignment Codes
+#define CASTER "staff-Caster"
+#define STAND "staff-Stand"
+#define CAYRO "staff-Cayro"
+#define REGISTRO "staff-Registro"
+#define UNOFFICIAL "staff-Unofficial"
+
 # Assignment Sets
 #define TOP_SIDE_SET "top-side-"
 #define SIDE_SET "side-"
@@ -16,11 +23,6 @@
 #define CHECKER "Checker"
 #define DELEGATE "delegate"
 #define DATAENTRY "dataentry"
-#define CASTER "staff-caster"
-#define STAND "staff-stand"
-#define CAYRO "staff-cayro"
-#define REGISTRO "staff-registro"
-#define UNOFFICIAL "staff-unofficial"
 Define("StandardJobs", [JUDGE, RUNNER, SCRAMBLER])
 
 # Properties

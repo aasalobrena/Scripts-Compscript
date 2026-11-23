@@ -25,10 +25,7 @@ CreateCompetitionGroupsAssignments(TeamWithDelegateCluster([SIDE_TEAM], [1]),
                                    2026-12-05T12:35
                                   )
 
-# Streaming
-ManuallyAssign([2012GONZ10], _777-r1, BIZKAIA_STAGE, 2)
-ManuallyAssign([2012GONZ10], _444-r1, BIZKAIA_STAGE, 1)
-ManuallyAssign([2020NUNE01], _333-r1, BIZKAIA_STAGE, 1)
+# Streaming Team
 ManuallyAssign([2009ORTI01, 2020NUNE01], _clock-r1, MAIN_ROOM, 1, CASTER)
 ManuallyAssign([2020NUNE01, 2012GONZ10, 2023FERN54], _clock-r1, MAIN_ROOM, 2, CASTER)
 ManuallyAssign([2012GONZ10, 2009ORTI01], _777-r1, MAIN_ROOM, 1, CASTER)
@@ -65,16 +62,7 @@ ManuallyAssign([2009ORTI01, 2012GONZ10], _333oh-r1, MAIN_ROOM, 1, CASTER)
 ManuallyAssign([2009ORTI01, 2020NUNE01, 2024ZARR01], _333oh-r1, MAIN_ROOM, 2, CASTER)
 ManuallyAssign([2020NUNE01, 2012GONZ10, 2024ZARR01], _333oh-r1, MAIN_ROOM, 3, CASTER)
 
-# Stand AES
-ManuallyAssign([2022BAGU01], _777-r1, GIPUZKOA_STAGE, 2)
-ManuallyAssign([2022BAGU01], _666-r1, GIPUZKOA_STAGE, 2)
-ManuallyAssign([2022MENE02], _555-r1, GIPUZKOA_STAGE, 2)
-ManuallyAssign([2019TORR29], _555-r1, GIPUZKOA_STAGE, 1)
-ManuallyAssign([2019TORR29], _minx-r1, BIZKAIA_STAGE, 2)
-ManuallyAssign([2018FRAN17], _222-r1, GIPUZKOA_STAGE, 3)
-ManuallyAssign([2018MOLI03], _222-r1, GIPUZKOA_STAGE, 3)
-ManuallyAssign([2019TORR29], _222-r1, GIPUZKOA_STAGE, 2)
-ManuallyAssign([2019TORR29], _333oh-r1, GIPUZKOA_STAGE, 3)
+# Stand Team
 ManuallyAssign([2022MENE02, 2022BAGU01, 2018FRAN17, 2023AZUR01, 2019TORR29], _clock-r1, MAIN_ROOM, 1, REGISTRO)
 ManuallyAssign([2022MENE02, 2022BAGU01, 2018FRAN17, 2023AZUR01, 2018MOLI03], _clock-r1, MAIN_ROOM, 2, REGISTRO)
 ManuallyAssign([2022BAGU01], _777-r1, MAIN_ROOM, 1, CAYRO)
