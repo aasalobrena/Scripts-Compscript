@@ -1,3 +1,10 @@
+# Assignment Codes
+#define CASTER "staff-Caster"
+#define STAND "staff-Stand"
+#define CAYRO "staff-Cayro"
+#define REGISTRO "staff-Registro"
+#define UNOFFICIAL "staff-Unofficial"
+
 # Assignment Sets
 #define TOP_SIDE_SET "top-side-"
 #define SIDE_SET "side-"
