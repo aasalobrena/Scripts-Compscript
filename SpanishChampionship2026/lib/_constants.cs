@@ -16,6 +16,11 @@
 #define CHECKER "Checker"
 #define DELEGATE "delegate"
 #define DATAENTRY "dataentry"
+#define CASTER "staff-caster"
+#define STAND "staff-stand"
+#define CAYRO "staff-cayro"
+#define REGISTRO "staff-registro"
+#define UNOFFICIAL "staff-unofficial"
 Define("StandardJobs", [JUDGE, RUNNER, SCRAMBLER])
 
 # Properties
